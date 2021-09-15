@@ -1,3 +1,1 @@
-This is a readme file
-
-Usage of the app
+# COMP229_LAB01
