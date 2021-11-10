@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-basepage',
@@ -7,9 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BasepageComponent implements OnInit {
 
-  constructor() { }
+  title: string;
+  constructor(private route: ActivatedRoute) { this.title =''; }
 
   ngOnInit(): void {
+    this.title = this.route.snapshot.data['title'];
   }
 
 }
