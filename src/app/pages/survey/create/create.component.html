@@ -1,0 +1,38 @@
+<app-basepage></app-basepage>
+
+<div class="container">
+    <h4>Choose a survery type</h4>
+    <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+        <label class="form-check-label" for="flexCheckDefault">
+            True or False
+        </label>
+    </div>
+    <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked disabled>
+        <label class="form-check-label" for="flexCheckChecked">
+            Multiple Choice (Coming soon?)
+        </label>
+    </div>
+</div>
+
+<div class="container ">
+    <div class="input-group col-md-2">
+        <span class="input-group-text">no. of Questions</span>
+        <input type="number" class="form-control" id="questionCount">
+        <span class="input-group-text btn btn-primary" (click)='addQuestions()'>Add</span>
+    </div>
+</div>
+
+<div *ngFor='let i of questionsCount' class="container">
+    <div class="container">
+        <div class="input-group mb-3" id="question">
+            <span class="input-group-text">Question {{i+1}}</span>
+            <input type="text" class="form-control">
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <button class="btn btn-primary" type="submit">Submit</button>
+</div>
