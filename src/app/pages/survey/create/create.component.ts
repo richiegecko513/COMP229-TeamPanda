@@ -5,11 +5,19 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './create.component.html',
   styleUrls: ['./create.component.css']
 })
-export class CreateComponent implements OnInit {
+export class CreateComponent {
 
-  constructor() { }
+ // constructor() { }
 
-  ngOnInit(): void {
+  //ngOnInit(): void {
+  //}
+
+  questionsCount :number[];
+
+  addQuestions(){
+
+    const count = (<HTMLInputElement>document.getElementById("questionCount")).value;
+    this.questionsCount = Array(parseInt(count) -1).fill(0).map((x,i)=>i);
   }
 
 }
