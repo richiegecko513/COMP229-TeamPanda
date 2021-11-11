@@ -6,6 +6,8 @@ const SurveyTemplate = new Schema({
     title: String,
     questionIds: [String],
     username: String, //until auth
+    activeDate: Date,
+    expiryDate: Date
 },
     {
         timestamps: true
