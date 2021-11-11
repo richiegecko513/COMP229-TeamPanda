@@ -1,38 +1,74 @@
 <app-basepage></app-basepage>
 
-<div class="container">
-    <h4>Choose a survery type</h4>
-    <div class="form-check">
-        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-        <label class="form-check-label" for="flexCheckDefault">
-            True or False
-        </label>
-    </div>
-    <div class="form-check">
-        <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked disabled>
-        <label class="form-check-label" for="flexCheckChecked">
-            Multiple Choice (Coming soon?)
-        </label>
-    </div>
-</div>
-
-<div class="container ">
-    <div class="input-group col-md-2">
-        <span class="input-group-text">no. of Questions</span>
-        <input type="number" class="form-control" id="questionCount">
-        <span class="input-group-text btn btn-primary" (click)='addQuestions()'>Add</span>
-    </div>
-</div>
-
-<div *ngFor='let i of questionsCount' class="container">
+<div class="container content">
+    <!--Survey Type -->
     <div class="container">
-        <div class="input-group mb-3" id="question">
-            <span class="input-group-text">Question {{i+1}}</span>
-            <input type="text" class="form-control">
+        <h4>Choose a survery type</h4>
+
+        <div class="form-check form-check-inline m-3">
+            <input class="form-check-input" type="radio" name="trueOrFalse" id="trueOrFalse" value="trueOrFalse"
+                checked>
+            <label class="form-check-label" for="trueOrFalse"> True or False</label>
+        </div>
+        <div class="form-check form-check-inline m-3">
+            <input class="form-check-input" type="radio" name="multipleChoise" id="multipleChoise"
+                value="multipleChoise" disabled>
+            <label class="form-check-label" for="multipleChoise"> Multiple Choice (Coming soon?)</label>
+        </div>
+
+    </div>
+
+    <!--Add the number of questions-->
+    <div class="container ">
+        <div class="row">
+            <div class="input-group col m-3">
+                <span class="input-group-text">no. of Questions</span>
+                <input type="number" class="form-control" id="questionCount" name="questionCount">
+                <span class="input-group-text btn btn-primary" (click)='addQuestions()'>Add</span>
+            </div>
+            <div class="input-group col m-3">
+                <span class="input-group-text">Lifetime</span>
+                <input type="number" class="form-control" id="surveyLifetime" name="surveyLifetime">
+                <span class="input-group-text">Days</span>
+            </div>
+        </div>
+
+    </div>
+
+
+    <div *ngFor='let i of questionsCount' class="container">
+        <div class="container">
+            <!--Customize the question text-->
+            <div class="input-group mb-3 m-3" id="question">
+                <span class="input-group-text">Question {{i+1}}</span>
+                <input type="text" class="form-control" id="question{{i}}" name="question{{i}}" required>
+                <!--<span class="input-group-text btn btn-danger" (click)='deleteQuestion()' id="delete">-</span>-->
+            </div>
+
+            <!--Answer options-->
+            <div class="container">
+
+                <div class="form-check form-check-inline m-3">
+                    <input class="form-check-input" type="radio" name="trueRadio" id="trueRadio" value="true" disabled>
+                    <label class="form-check-label" for="trueRadio">True</label>
+                </div>
+                <div class="form-check form-check-inline m-3">
+                    <input class="form-check-input" type="radio" name="falseRadio" id="falseRadio" value="false"
+                        disabled>
+                    <label class="form-check-label" for="falseRadio">False</label>
+                </div>
+            </div>
+
         </div>
     </div>
-</div>
 
-<div class="container">
-    <button class="btn btn-primary" type="submit">Submit</button>
+
+    <!--Survey Lifetime Input-->
+
+    <div class="container text-center">
+        <button class="btn btn-primary" type="submit"><i class="fas fa-plus-square"></i> Submit</button>
+        <a href="#" class="btn btn-warning  m-3">
+            <i class="fas fa-undo"></i> Cancel</a>
+    </div>
+
 </div>
