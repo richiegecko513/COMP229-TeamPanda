@@ -9,7 +9,7 @@
             <table class=" table-bordered  text-center">
                 <!--Header row-->
                 <tr>
-                    <th class="text-center col-6">Survey Name</th>
+                    <th class="text-center col-6"> Survey Name</th>
                     <th class="text-center col-2"></th>
                     <th class="text-center col-2"></th>
                 </tr>
@@ -17,7 +17,7 @@
                 <!--Repeatable Template Row-->
                 <tr *ngFor='let survey of surveys'>
 
-                    <td class="text-center">{{survey.title}}</td>
+                    <td class="text-center"><a href="#">{{survey.title}}</a></td>
                     <td class="text-center">
                         <a href="#" class="btn btn-primary btn-sm"><i class="fas fa-pencil-alt"></i> Update</a>
                     </td>
@@ -25,7 +25,6 @@
                         <a href="#" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i> Delete</a>
                     </td>
                 </tr>
-
             </table>
         </div>
 
