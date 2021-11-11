@@ -10,6 +10,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { ListComponent } from './pages/survey/list/list.component';
 import { CreateComponent } from './pages/survey/create/create.component';
 import { UpdateComponent } from './pages/survey/update/update.component';
+import { FillComponent } from './pages/survey/fill/fill.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { UpdateComponent } from './pages/survey/update/update.component';
     HomeComponent,
     ListComponent,
     CreateComponent,
-    UpdateComponent
+    UpdateComponent,
+    FillComponent
   ],
   imports: [
     BrowserModule,
