@@ -1,41 +1,36 @@
 <app-basepage></app-basepage>
 
-<div class="container content">
+<div class="container content ">
     <!--Survey Type -->
-    <div class="container">
+    <div class="container row" >
         <h4>Choose a survery type</h4>
 
-        <div class="form-check form-check-inline m-3">
+        <div class="form-check form-check-inline m-3 col-2">
             <input class="form-check-input" type="radio" name="trueOrFalse" id="trueOrFalse" value="trueOrFalse"
                 checked>
             <label class="form-check-label" for="trueOrFalse"> True or False</label>
         </div>
-        <div class="form-check form-check-inline m-3">
+        <div class="form-check form-check-inline m-3 col-5">
             <input class="form-check-input" type="radio" name="multipleChoise" id="multipleChoise"
                 value="multipleChoise" disabled>
             <label class="form-check-label" for="multipleChoise"> Multiple Choice (Coming soon?)</label>
-        </div>
-
+        </div>   
     </div>
 
-    <!--Add the number of questions-->
-    <div class="container ">
-        <div class="row">
-            <div class="input-group col m-3">
-                <span class="input-group-text">no. of Questions</span>
-                <input type="number" class="form-control" id="questionCount" name="questionCount">
-                <span class="input-group-text btn btn-primary" (click)='addQuestions()'>Add</span>
-            </div>
-            <div class="input-group col m-3">
-                <span class="input-group-text">Lifetime</span>
-                <input type="number" class="form-control" id="surveyLifetime" name="surveyLifetime">
-                <span class="input-group-text">Days</span>
-            </div>
+    <!--The Survey title and the Lifetime-->
+    <div class="container row m-3 pb-5 ">
+        <div class="input-group col ">
+            <span class="input-group-text">Survey Name</span>
+            <input type="text" class="form-control" id="surveyTitle" name="surveyTitle">
         </div>
-
+        <div class="input-group col ">
+            <span class="input-group-text">Survey Lifetime</span>
+            <input type="number" class="form-control" id="surveyLifetime" name="surveyLifetime">
+            <span class="input-group-text">Days</span>
+        </div>
     </div>
 
-
+    <!--Repeat for 10 questions-->
     <div *ngFor='let i of questionsCount' class="container">
         <div class="container">
             <!--Customize the question text-->
@@ -46,8 +41,7 @@
             </div>
 
             <!--Answer options-->
-            <div class="container">
-
+            <div class="container text-center ">
                 <div class="form-check form-check-inline m-3">
                     <input class="form-check-input" type="radio" name="trueRadio" id="trueRadio" value="true" disabled>
                     <label class="form-check-label" for="trueRadio">True</label>
@@ -58,17 +52,14 @@
                     <label class="form-check-label" for="falseRadio">False</label>
                 </div>
             </div>
-
         </div>
     </div>
 
 
-    <!--Survey Lifetime Input-->
-
+    <!--Buttons-->
     <div class="container text-center">
         <button class="btn btn-primary" type="submit"><i class="fas fa-plus-square"></i> Submit</button>
         <a href="#" class="btn btn-warning  m-3">
             <i class="fas fa-undo"></i> Cancel</a>
     </div>
-
 </div>
