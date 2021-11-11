@@ -17,7 +17,14 @@ export class CreateComponent {
   addQuestions(){
 
     const count = (<HTMLInputElement>document.getElementById("questionCount")).value;
-    this.questionsCount = Array(parseInt(count) -1).fill(0).map((x,i)=>i);
+    this.questionsCount = Array(parseInt(count)).fill(0).map((x,i)=>i);
   }
+
+  //Future implementation maybe
+  // deleteQuestion(){
+  //  document.getElementById("delete").parentElement.parentElement.remove();      
+  // }
+
+  
 
 }
