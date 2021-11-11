@@ -7,9 +7,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FillComponent implements OnInit {
 
-  constructor() { }
+  //constructor() { }
 
+  
+   questionsCount :number[];
   ngOnInit(): void {
+    this.questionsCount = Array(10).fill(0).map((x,i)=>i);
   }
+
 
 }
