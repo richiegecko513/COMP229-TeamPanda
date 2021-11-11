@@ -1,117 +1,50 @@
 <app-basepage></app-basepage>
 
+<div class="container content ">
+   
 
-<div class="container">
-    <div class="row">
-        <div class="offset-md-2 col-md-8  p-5">
-           
-
-            <form method="POST" class="form">
-                <div class="form-group">
-                    <label for="surveyTitleTextField">Survey Name: </label>
-                    <input type="text" class="form-control"
-                    id="surveyTitleTextField"
-                    name="surveyTitle"
-                    value=""
-                    required>               
-                </div>
-                <div class="form-group">
-                    <label for="surveyLifetimeTextField">Survey Lifetime: </label>
-                    <input type="number" class="form-control"
-                    id="surveyLifetimeTextField"
-                    name="surveyLifetime"
-                    value=""
-                    required>               
-                </div>
-                <div class="form-group">
-                    <label for="question1TextField">Q.1: </label>
-                    <input type="text" class="form-control"
-                    id="question1TextField"
-                    name="question1"
-                    value=""
-                    required>               
-                </div>
-                <div class="form-group">
-                    <label for="question2TextField">Q.2: </label>
-                    <input type="text" class="form-control"
-                    id="question2TextField"
-                    name="question2"
-                    value=""
-                    required>               
-                </div>    
-                <div class="form-group">
-                    <label for="question3TextField">Q.3: </label>
-                    <input type="text" class="form-control"
-                    id="question3TextField"
-                    name="question3"
-                    value=""
-                    required>               
-                </div>    
-                <div class="form-group">
-                    <label for="question4TextField">Q.4: </label>
-                    <input type="text" class="form-control"
-                    id="question4TextField"
-                    name="question4"
-                    value=""
-                    required>               
-                </div>    
-                <div class="form-group">
-                    <label for="question5TextField">Q.5: </label>
-                    <input type="text" class="form-control"
-                    id="question5TextField"
-                    name="question5"
-                    value=""
-                    required>               
-                </div>    
-                <div class="form-group">
-                    <label for="question6TextField">Q.6: </label>
-                    <input type="text" class="form-control"
-                    id="question6TextField"
-                    name="question6"
-                    value=""
-                    required>               
-                </div>    
-                <div class="form-group">
-                    <label for="question7TextField">Q.7: </label>
-                    <input type="text" class="form-control"
-                    id="question7TextField"
-                    name="question7"
-                    value=""
-                    required>               
-                </div>    
-                <div class="form-group">
-                    <label for="question8TextField">Q.8: </label>
-                    <input type="text" class="form-control"
-                    id="question8TextField"
-                    name="question8"
-                    value=""
-                    required>               
-                </div>    
-                <div class="form-group">
-                    <label for="question9TextField">Q.9: </label>
-                    <input type="text" class="form-control"
-                    id="question9TextField"
-                    name="question9"
-                    value=""
-                    required>               
-                </div>    <div class="form-group">
-                    <label for="question10TextField">Q.10: </label>
-                    <input type="text" class="form-control"
-                    id="question10TextField"
-                    name="question10"
-                    value=""
-                    required>               
-                 </div>
-
-                <!--Buttons-->
-                <div class="text-center m-5 ">
-                    <button class="btn btn-primary m-3" type="submit">
-                    <i class="fas fa-edit"></i> Submit</button>
-
-                    <a href="/survey-list" class="btn btn-warning  m-3">
-                    <i class="fas fa-undo"></i> Cancel</a>
-                </div>
-            </form>
+    <!--The Survey title and the Lifetime-->
+    <div class="container row m-3 pb-5 ">
+        <div class="input-group col ">
+            <span class="input-group-text">Survey Name</span>
+            <input type="text" class="form-control" id="surveyTitle" name="surveyTitle"  value="Plug in survey.title">
         </div>
+        <div class="input-group col ">
+            <span class="input-group-text">Survey Lifetime</span>
+            <input type="text" class="form-control" id="surveyLifetime" name="surveyLifetime"  value="Plug in survey.lifetime">
+            <span class="input-group-text">Days</span>
+        </div>
+    </div>
+
+    <!--Repeat for 10 questions-->
+    <div *ngFor='let i of questionsCount' class="container">
+        <div class="container">
+            <!--Customize the question text-->
+            <div class="input-group mb-3 m-3" id="question">
+                <span class="input-group-text">Question {{i+1}}</span>
+                <input type="text" class="form-control" id="question{{i}}Textfield" name="question{{i+1}}" value="Plug in survey.question {{i+1}}" required>
+            </div>
+
+            <!--Answer options-->
+            <div class="container text-center ">
+                <div class="form-check form-check-inline m-3">
+                    <input class="form-check-input" type="radio" name="trueRadio" id="trueRadio" value="true" disabled>
+                    <label class="form-check-label" for="trueRadio">True</label>
+                </div>
+                <div class="form-check form-check-inline m-3">
+                    <input class="form-check-input" type="radio" name="falseRadio" id="falseRadio" value="false"
+                        disabled>
+                    <label class="form-check-label" for="falseRadio">False</label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!--Buttons-->
+    <div class="container text-center">
+        <button class="btn btn-primary" type="submit"><i class="fas fa-plus-square"></i> Submit</button>
+        <a href="#" class="btn btn-warning  m-3">
+            <i class="fas fa-undo"></i> Cancel</a>
     </div>
 </div>
