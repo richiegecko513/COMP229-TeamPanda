@@ -7,17 +7,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CreateComponent {
 
- // constructor() { }
-
-  //ngOnInit(): void {
-  //}
-
+ 
   questionsCount :number[];
 
-  addQuestions(){
-
-    const count = (<HTMLInputElement>document.getElementById("questionCount")).value;
-    this.questionsCount = Array(parseInt(count) -1).fill(0).map((x,i)=>i);
+  ngOnInit(): void {
+    this.questionsCount = Array(10).fill(0).map((x,i)=>i);
   }
+
+  
+  //Future implementation maybe
+  //addQuestions(){
+  //  const count = 10;
+  //  this.questionsCount = Array(10).fill(0).map((x,i)=>i);
+  //}
+  // deleteQuestion(){
+  //  document.getElementById("delete").parentElement.parentElement.remove();      
+  // }
+
+  
 
 }
