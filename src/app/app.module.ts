@@ -12,7 +12,7 @@ import { ListComponent } from './pages/survey/list/list.component';
 import { CreateComponent } from './pages/survey/create/create.component';
 import { UpdateComponent } from './pages/survey/update/update.component';
 import { FillComponent } from './pages/survey/fill/fill.component';
-import { ListModule } from './pages/survey/list/list-module';
+import { ListModule } from './pages/survey/list/list.module';
 import { DeleteComponent } from './pages/survey/delete/delete.component';
 
 
