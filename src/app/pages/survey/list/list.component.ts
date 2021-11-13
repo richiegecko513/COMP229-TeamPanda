@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
+//!!!!!!!!!!!!!!!!!!! the path might be wrong
+import { Survey } from 'src/model/survey.model';
+import { SurveyRepository } from 'src/model/survey.repository';
+
 @Component({
   selector: 'app-list',
   templateUrl: './list.component.html',
@@ -7,9 +11,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ListComponent {
 
-//  constructor() { }
+  constructor(private repository: SurveyRepository) { }
 
- // ngOnInit(): void {
-  //}
+  get surveys(): Survey[]{
+ 
+     return this.repository.getSurveys( );
+  }
+
+  //use to check whether the page is getting the data
+  ngOnInit(): void {
+    console.log(this.surveys.length);
+  }
 
 }
