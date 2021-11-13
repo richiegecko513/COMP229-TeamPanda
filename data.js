@@ -1,4 +1,4 @@
-
+//this is just data that helped me format the table
 // eslint-disable-next-line no-undef
 module.exports = function () {
 
