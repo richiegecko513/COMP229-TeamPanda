@@ -1,20 +1,23 @@
-import { model, Schema } from "mongoose";
+import { Date } from "mongoose";
+export class Survey
+{
+    constructor(
+        public _id?: string,
+        public title?:string,
+        public questions?:{
+             _id?: string,
+             label?: string,
+             answer?: string
+        },      //how do we list multiple questions for one survey?
+        public author?: string, 
+        public activeDate?: Date,
+        public expiryDate?: Date,
+    ){}
+}
 
 
-const SurveyTemplate = new Schema({
-    _id: String,
-    title: String,
-    questionIds: [String],
-    username: String, //until auth
-    activeDate: Date,
-    expiryDate: Date
-},
-    {
-        timestamps: true
-    });
 
 
 
-const Survey = model('Survey', SurveyTemplate);
 
 
