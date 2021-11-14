@@ -3,7 +3,7 @@
 module.exports = function () {
 
     return {
-        surveys: [
+        "survey-list": [
 
             {
 
@@ -11,6 +11,8 @@ module.exports = function () {
                 "title": "School Survey",
                 "lifetime": 3,
                 "active": "true",
+                "dateOpen":"2021/11/13",
+                "dateClosed":"2021/11/15",
                 "q1": "school q1",
                 "q2": "school q",
                 "q3": "school q3",
@@ -28,6 +30,8 @@ module.exports = function () {
                 "title": "Game Survey",
                 "lifetime": 2,
                 "active": "true",
+                "dateOpen":"2021/11/13",
+                "dateClosed":"2021/11/16",
                 "q1": "game q1",
                 "q2": "game q",
                 "q3": "game q3",
