@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
 //!!!!!!!!!!!!!!!!!!! the path might be wrong
-import { Survey } from 'src/model/survey.model';
-import { SurveyRepository } from 'src/model/survey.repository';
+import { Survey } from 'src/app/model-2/survey.model';
+import { SurveyRepository } from 'src/app/model-2/survey.repository';
 
 @Component({
   selector: 'app-list',
@@ -15,7 +15,7 @@ export class ListComponent {
 
   get surveys(): Survey[]{
  
-     return this.repository.getSurveys( );
+     return this.repository.getActiveSurveys()
   }
 
   //use to check whether the page is getting the data
