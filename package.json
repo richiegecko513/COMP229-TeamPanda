@@ -9,7 +9,7 @@
     "test": "ng test",
     "lint": "eslint",
     "json": "json-server data.js -p 3500 -m authMiddleware.js",
-    "heroku-postbuild": "ng build — prod"
+    "heroku-postbuild": "ng build --prod"
   },
   "engines": {
     "node": "16.13.0",
@@ -41,6 +41,8 @@
   "devDependencies": {
     "@angular-devkit/build-angular": "~13.0.1",
     "@fortawesome/fontawesome-free": "^5.15.4",
+    "@angular/compiler": "~13.0.0",
+    "@angular/compiler-cli": "~13.0.0",
     "@types/bootstrap": "^5.1.6",
     "@types/jasmine": "~3.10.0",
     "@types/jquery": "^3.5.8",
