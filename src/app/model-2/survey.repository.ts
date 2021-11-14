@@ -13,8 +13,10 @@ export class SurveyRepository
     
     constructor(private dataSource: StaticDataSource )
     {
-           
+        console.log("problem here");
+        
        dataSource.getActiveSurveys().subscribe(data =>{
+        console.log("problem in the method");
         this.surveys = data;  
         //get the active surveys
         this.activeSurveys = data.filter(s => s.active == "true");
@@ -51,7 +53,7 @@ export class SurveyRepository
             const year = dateObj.getUTCFullYear();
 
             const today = year + "/" + month + "/" + day;
-            if(survey.dateClosed == today){
+            if(new Date(survey.dateClosed) <= new Date (today)){
            
                 survey.active ="false";
             }
