@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 //!!!!!!!!!!!!!!!!!!! the path might be wrong
 import { Survey } from 'src/app/model-2/survey.model';
@@ -15,12 +15,14 @@ export class ListComponent {
 
   get surveys(): Survey[]{
  
-     return this.repository.getActiveSurveys()
+     return this.repository.getActiveSurveys( );
   }
 
   //use to check whether the page is getting the data
   ngOnInit(): void {
-    console.log(this.surveys.length);
+    console.log(this.surveys.length);  
   }
+
+
 
 }
