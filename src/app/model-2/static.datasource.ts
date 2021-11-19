@@ -55,4 +55,9 @@ export class StaticDataSource{
         return from([this.surveys]);
 
     }
+
+    createSurvey(survey: Survey): Observable<Survey[]> {
+        console.log(JSON.stringify(survey));
+        return from ([this.surveys]);
+    }
 }

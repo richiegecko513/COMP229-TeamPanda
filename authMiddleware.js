@@ -1,4 +1,6 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable no-undef */
+const jwt = require('jsonwebtoken');
 const APP_SECRET = 'Secret';
 const USERNAME = 'admin';
 const PASSWORD = '123456';
