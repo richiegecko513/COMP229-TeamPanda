@@ -3,14 +3,14 @@ const app = express();
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 
-// const credentials =  {
-//     MONGO_USER: "TeamPanda",
-//     MONGO_PASSWORD: "password",
-//     MONGO_DB: "TeamPanda"
-// };
+const credentials =  {
+    MONGO_USER: "TeamPanda",
+    MONGO_PASSWORD: "ql3lbQ8dGnrvHtkg",
+    MONGO_DB: "Survey"
+};
 
-// const mongoURL = `mongodb+srv://${credentials.MONGO_USER}:${credentials.MONGO_PASSWORD}@survey.eig9j.mongodb.net/${credentials.MONGO_DB}?retryWrites=true&w=majority`;
-const mongoURL = "mongodb+srv://TeamPanda:<password>@survey.eig9j.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
+const mongoURL = `mongodb+srv://${credentials.MONGO_USER}:${credentials.MONGO_PASSWORD}@survey.eig9j.mongodb.net/${credentials.MONGO_DB}?retryWrites=true&w=majority`;
+// const mongoURL = "mongodb+srv://TeamPanda:ql3lbQ8dGnrvHtkg@survey.eig9j.mongodb.net/Survey?retryWrites=true&w=majority";
 
 mongoose.connect(mongoURL, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => {
