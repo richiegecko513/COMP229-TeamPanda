@@ -83,4 +83,4 @@ surveyRoute.route('/delete/:id').delete((req, res, next) => {
     })
 })
 
-module.exportss = surveyRoute;
+module.exports = surveyRoute;
