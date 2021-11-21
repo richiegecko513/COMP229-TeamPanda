@@ -1,86 +1,30 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-/* eslint-disable no-undef */
-const express = require('express');
-const app = express();
+let express = require('express');
+let router = express.Router();
 
-const surveyRoute = express.Router();
-let Survey = require('../models/survey');
+let surveyController = require('../controllers/survey');
 
-//Create a Survey
-surveyRoute.route('/create-survey').post((req, res, next) => {
-    Survey.create(req.body, (err, survey) => {
-        if(err)
-        {
-            console.log(err)
-        }
-        else
-        {
-            res.json(survey)
-        }
-    })
-});
+//GET route for displaying surveys
+router.get('/survey-list', surveyController.getSurveys);
 
-//get survey list
-surveyRoute.route('/survey-list').get((req, res) => {
-    Survey.find((err, surveyList) => {
-        if(err)
-        {
-            console.log(err)
-        }
-        else
-        {
-            res.json(surveyList)
-        }
-    })
-});
+//GET route for displaying create new survey page
+router.get('/create', surveyController.displayCreatePage);
 
-//get individual survey
+//POST route for processing create new survey page
+router.post('/create', surveyController.createSurvey);
 
-surveyRoute.route('/take-survey/:id').get((req, res)=> {
-    Survey.findById(req.params.id, (err, survey) => {
-        if(err)
-        {
-            console.log(err)
-        }
-        else
-        {
-            res.json(survey)
-        }
-    })
-});
+//GET route for displaying fill survey page
+router.get('take-survey/:id', surveyController.displaySurvey);
 
-//update survey
-surveyRoute.route('/update/:id').put((req, res, next) => {
-    Survey.findbyIdAndUpdate(req.params.id, {
-        $set: req.body
-    }, (err, survey) =>{
-        if(err) 
-        {
-            return next(err),
-            console.log(err)
-        }
-        else
-        {
-            res.json(survey)
-            console.log('Survey updated successfully')
-        }
-    })
-})
+//POST route for processing fill survey page
+router.post('take-survey/:id', surveyController.processSurveyPage);
 
-//Delete survey 
-surveyRoute.route('/delete/:id').delete((req, res, next) => {
-    Survey.findByIdAndRemove(req.params.id, (err, survey) => {
-        if(err)
-        {
-            console.log(err)
-        }
-        else
-        {
-            res.status(200).json({
-                msg: survey
-            })
-        }
-    })
-})
+//GET route for displaying update page
+router.get('/update/:id', surveyController.displayUpdatePage);
 
-module.exports = surveyRoute;
+//POST route for processing udpate page
+router.post('/update/:id', surveyController.updateSurvey);
+
+//GET to perform deletion
+router.get('/delete/:id', surveyController.deleteSurvey);
+
+module.exports = router;
