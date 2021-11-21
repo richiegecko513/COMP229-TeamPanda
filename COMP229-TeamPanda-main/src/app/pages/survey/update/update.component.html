@@ -1,0 +1,51 @@
+<app-basepage></app-basepage>
+
+<div class="container content ">
+    <form  method="post">
+        <!--The Survey title and the Lifetime-->
+        <div class="container row m-3 pb-5 ">
+            <div class="input-group col ">
+                <span class="input-group-text">Survey Name</span>
+                <input type="text" class="form-control" id="surveyTitle" name="surveyTitle"  value="Plug in survey.title" required>
+            </div>
+            <div class="input-group col ">
+                <span class="input-group-text">Survey Lifetime</span>
+                <input type="text" class="form-control" id="surveyLifetime" name="surveyLifetime"  value="Plug in survey.lifetime"  min="1" max="20" required>
+                <span class="input-group-text">Days</span>
+            </div>
+        </div>
+
+        <!--Repeat for 10 questions-->
+        <div *ngFor='let i of questionsCount' class="container">
+            <div class="container">
+                <!--Customize the question text-->
+                <div class="input-group mb-3 m-3" id="question">
+                    <span class="input-group-text">Question {{i+1}}</span>
+                    <input type="text" class="form-control" id="question{{i}}Textfield" name="question{{i+1}}" value="Plug in survey.question {{i+1}}" required>
+                </div>
+
+                <!--Answer options-->
+                <div class="container text-center ">
+                    <div class="form-check form-check-inline m-3">
+                        <input class="form-check-input" type="radio" name="trueRadio" id="trueRadio" value="true" disabled>
+                        <label class="form-check-label" for="trueRadio">True</label>
+                    </div>
+                    <div class="form-check form-check-inline m-3">
+                        <input class="form-check-input" type="radio" name="falseRadio" id="falseRadio" value="false"
+                            disabled>
+                        <label class="form-check-label" for="falseRadio">False</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!--Buttons-->
+        <div class="container text-center">
+            <button class="btn btn-primary" type="submit"><i class="fas fa-plus-square"></i> Submit</button>
+            <a href="#" class="btn btn-warning  m-3">
+                <i class="fas fa-undo"></i> Cancel</a>
+        </div>
+    </form>
+  
+</div>

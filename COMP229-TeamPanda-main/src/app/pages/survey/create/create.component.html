@@ -1,0 +1,68 @@
+<app-basepage></app-basepage>
+
+<div class="container content ">
+
+    <form method="post">
+ <!--Survey Type -->
+    <div class="container row" >
+        <h4>Choose a survery type</h4>
+
+        <div class="form-check form-check-inline m-3 col-2">
+            <input class="form-check-input" type="radio" name="yesOrNo" id="yesOrNo" value="yesOrNo"
+                checked>
+            <label class="form-check-label" for="yesOrNo"> Yes or No</label>
+        </div>
+        <div class="form-check form-check-inline m-3 col-5">
+            <input class="form-check-input" type="radio" name="multipleChoise" id="multipleChoise"
+                value="multipleChoise" disabled>
+            <label class="form-check-label" for="multipleChoise"> Multiple Choice (Coming soon?)</label>
+        </div>   
+    </div>
+
+    <!--The Survey title and the Lifetime-->
+    <div class="container row m-3 pb-5 ">
+        <div class="input-group col ">
+            <span class="input-group-text">Survey Name</span>
+            <input type="text" class="form-control" id="surveyTitle" name="surveyTitle" required>
+        </div>
+        <div class="input-group col ">
+            <span class="input-group-text">Survey Lifetime</span>
+            <input type="number" class="form-control" id="surveyLifetime" name="surveyLifetime" min="1" max="20" required>
+            <span class="input-group-text">Days</span>
+        </div>
+    </div>
+
+    <!--Repeat for 10 questions-->
+    <div *ngFor='let i of questionsCount' class="container">
+        <div class="container">
+            <!--Customize the question text-->
+            <div class="input-group mb-3 m-3" id="question">
+                <span class="input-group-text">Question {{i+1}}</span>
+                <input type="text" class="form-control" id="question{{i+1}}Textfield" name="question{{i+1}}" required>
+            </div>
+
+            <!--Answer options-->
+            <div class="container text-center ">
+                <div class="form-check form-check-inline m-3">
+                    <input class="form-check-input" type="radio" name="yesRadio" id="yesRadio" value="yes" disabled>
+                    <label class="form-check-label" for="yesRadio">Yes</label>
+                </div>
+                <div class="form-check form-check-inline m-3">
+                    <input class="form-check-input" type="radio" name="noRadio" id="noRadio" value="no"
+                        disabled>
+                    <label class="form-check-label" for="noRadio">No</label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!--Buttons-->
+    <div class="container text-center">
+        <button class="btn btn-primary" type="submit"><i class="fas fa-plus-square"></i> Submit</button>
+        <a href="#" class="btn btn-warning  m-3">
+            <i class="fas fa-undo"></i> Cancel</a>
+    </div>
+   
+    </form>
+  </div>  
