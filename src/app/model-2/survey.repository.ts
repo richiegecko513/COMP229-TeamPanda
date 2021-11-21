@@ -13,10 +13,8 @@ export class SurveyRepository
     
     constructor(private dataSource: StaticDataSource )
     {
-        console.log("problem here");
         
-       dataSource.getActiveSurveys().subscribe(data =>{
-        console.log("problem in the method");
+       dataSource.getActiveSurveys().subscribe(data =>{  
         this.surveys = data;  
         //get the active surveys
         this.activeSurveys = data.filter(s => s.active == "true");
