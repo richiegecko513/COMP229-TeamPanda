@@ -4,13 +4,13 @@
 
     <h2>survey.title</h2>
 
-    <form  method="post">
+    <form  method="post" class="text-center bg-dark text-light rounded">
         <!--Repeat for 10 questions-->
-        <div *ngFor='let i of questionsCount' class="container">
+        <div *ngFor='let i of questionsCount' class="container ">
             <div class="container">
                 <div>
                     <!--Display the questions-->
-                    <label for="answer{{i+1}}Textfield">Plug in question {{i+1}}: </label>
+                    <label for="answer{{i+1}}Textfield">This is a sample question to see if it will look good question {{i+1}}: </label>
                     <!--Radio options-->
                     <div class="form-check form-check-inline m-3">
                         <input class="form-check-input" type="radio" name="answerRadio{{i+1}}" id="yesRadio{{i}}" value="yes" >
@@ -26,7 +26,7 @@
         </div>
         <!--Buttons-->
         <div class="container text-center">
-            <button class="btn btn-primary" type="submit"><i class="fas fa-plus-square"></i> Submit</button>
+            <button class="btn btn-primary" type="submit"><i class="fas fa-share-square"></i> Submit</button>
             <a href="#" class="btn btn-warning  m-3">
                 <i class="fas fa-undo"></i> Cancel</a>
         </div>
