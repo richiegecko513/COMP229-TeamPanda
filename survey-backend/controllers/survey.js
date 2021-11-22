@@ -21,7 +21,7 @@ module.exports.createSurvey = (req, res) => {
         if(err)
         {
             console.log(err);
-            res.end(err);
+            res.json({error: err});
         }
         else
         {
@@ -44,7 +44,10 @@ exports.getSurveys = (req, res) => {
         }
         else
         {
-            res.json(surveyList);
+            res.status(200).json({
+                message: 'All surveys fetched successfully',
+                surveyList: surveyList
+            });
         }
     })
 };
@@ -56,7 +59,7 @@ exports.displaySurvey = (req, res) => {
     Survey.findById(id,(err, surveyToFill)=>{
         if(err){
             console.log(err);
-            res.end(err);
+            // res.end(err);
         }
         else{
             res.json({success:true, msg:"Successfully displayed a survey to fill", survey: surveyToFill});
@@ -84,7 +87,7 @@ let filledSurvey = SurveyResponse({
 SurveyResponse.create(newSurvey, (err, filledSurvey)=>{
     if(err){
         console.log(err);
-        res.end(err);
+        // res.end(err);
     }
     else{ 
         res.json({success:true, msg:"Successfully submitted responses"});
@@ -100,7 +103,7 @@ module.exports.displayUpdatePage = (req, res) => {
         if(err)
         {
             console.log(err);
-            res.end(err);
+            // res.end(err);
         }
         else
         {
@@ -135,7 +138,7 @@ module.exports.updateSurvey = (req, res) => {
         if(err)
         {
             console.log(err);
-            res.end(err);
+            // res.end(err);
         }
         else
         {
@@ -152,7 +155,7 @@ module.exports.deleteSurvey = (req, res) => {
         if(err)
         {
             console.log(err);
-            res.end(err);
+            // res.end(err);
         }
         else
         {
