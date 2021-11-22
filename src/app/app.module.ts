@@ -14,6 +14,7 @@ import { UpdateComponent } from './pages/survey/update/update.component';
 import { FillComponent } from './pages/survey/fill/fill.component';
 import { ListModule } from './pages/survey/list/list.module';
 import { DeleteComponent } from './pages/survey/delete/delete.component';
+import { LoginComponent } from './pages/login/login.component';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { DeleteComponent } from './pages/survey/delete/delete.component';
     CreateComponent,
     UpdateComponent,
     FillComponent,
-    DeleteComponent
+    DeleteComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

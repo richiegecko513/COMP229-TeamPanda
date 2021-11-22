@@ -6,43 +6,99 @@
         <div class="container row m-3 pb-5 ">
             <div class="input-group col ">
                 <span class="input-group-text">Survey Name</span>
-                <input type="text" class="form-control" id="surveyTitle" name="surveyTitle"  value="Plug in survey.title" required>
+                <input type="text" class="form-control" id="surveyTitle" name="surveyTitle"  value="{{survey.title}}" required>
             </div>
             <div class="input-group col ">
                 <span class="input-group-text">Survey Lifetime</span>
-                <input type="text" class="form-control" id="surveyLifetime" name="surveyLifetime"  value="Plug in survey.lifetime"  min="1" max="20" required>
+                <input type="text" class="form-control" id="surveyLifetime" name="surveyLifetime"  value="{{survey.lifetime}}"  min="1" max="20" required>
                 <span class="input-group-text">Days</span>
             </div>
         </div>
 
-        <!--Repeat for 10 questions-->
-        <div *ngFor='let i of questionsCount' class="container">
+        <!-- 10 questions-->
+        <div  class="container">
             <div class="container">
                 <!--Customize the question text-->
                 <div class="input-group mb-3 m-3" id="question">
-                    <span class="input-group-text">Question {{i+1}}</span>
-                    <input type="text" class="form-control" id="question{{i}}Textfield" name="question{{i+1}}" value="Plug in survey.question {{i+1}}" required>
+                    <span class="input-group-text">1</span>
+                    <input type="text" class="form-control" id="question1Textfield" name="question1" value="Plug in  {{survey.q1}}" required>
                 </div>
+            </div>
 
-                <!--Answer options-->
-                <div class="container text-center ">
-                    <div class="form-check form-check-inline m-3">
-                        <input class="form-check-input" type="radio" name="trueRadio" id="trueRadio" value="true" disabled>
-                        <label class="form-check-label" for="trueRadio">True</label>
-                    </div>
-                    <div class="form-check form-check-inline m-3">
-                        <input class="form-check-input" type="radio" name="falseRadio" id="falseRadio" value="false"
-                            disabled>
-                        <label class="form-check-label" for="falseRadio">False</label>
-                    </div>
+
+            <div class="container">
+                <!--Customize the question text-->
+                <div class="input-group mb-3 m-3" id="question">
+                    <span class="input-group-text">2</span>
+                    <input type="text" class="form-control" id="question2Textfield" name="question2" value="Plug in  {{survey.q2}}" required>
+                </div>
+            </div>
+            <div class="container">
+                <!--Customize the question text-->
+                <div class="input-group mb-3 m-3" id="question">
+                    <span class="input-group-text">3</span>
+                    <input type="text" class="form-control" id="question3Textfield" name="question3" value="Plug in  {{survey.q3}}" required>
+                </div>
+            </div>
+            <div class="container">
+                <!--Customize the question text-->
+                <div class="input-group mb-3 m-3" id="question">
+                    <span class="input-group-text">4</span>
+                    <input type="text" class="form-control" id="question4Textfield" name="question4" value="Plug in  {{survey.q4}}" required>
+                </div>
+            </div>
+            <div class="container">
+                <!--Customize the question text-->
+                <div class="input-group mb-3 m-3" id="question">
+                    <span class="input-group-text">5</span>
+                    <input type="text" class="form-control" id="question5Textfield" name="question5" value="Plug in  {{survey.q5}}" required>
+                </div>
+            </div>
+            <div class="container">
+                <!--Customize the question text-->
+                <div class="input-group mb-3 m-3" id="question">
+                    <span class="input-group-text">6</span>
+                    <input type="text" class="form-control" id="question6Textfield" name="question6" value="Plug in  {{survey.q6}}" required>
+                </div>
+            </div>
+            <div class="container">
+                <!--Customize the question text-->
+                <div class="input-group mb-3 m-3" id="question">
+                    <span class="input-group-text">7</span>
+                    <input type="text" class="form-control" id="question7Textfield" name="question7" value="Plug in  {{survey.q7}}" required>
+                </div>
+            </div>
+            <div class="container">
+                <!--Customize the question text-->
+                <div class="input-group mb-3 m-3" id="question">
+                    <span class="input-group-text">8</span>
+                    <input type="text" class="form-control" id="question8Textfield" name="question8" value="Plug in  {{survey.q8}}" required>
+                </div>
+            </div>
+            <div class="container">
+                <!--Customize the question text-->
+                <div class="input-group mb-3 m-3" id="question">
+                    <span class="input-group-text">9</span>
+                    <input type="text" class="form-control" id="question9Textfield" name="question9" value="Plug in  {{survey.q9}}" required>
+                </div>
+            </div>
+            <div class="container">
+                <!--Customize the question text-->
+                <div class="input-group mb-3 m-3" id="question">
+                    <span class="input-group-text">10</span>
+                    <input type="text" class="form-control" id="question10Textfield" name="question10" value="Plug in  {{survey.q10}}" required>
                 </div>
             </div>
         </div>
 
 
+
+
+
+
         <!--Buttons-->
         <div class="container text-center">
-            <button class="btn btn-primary" type="submit"><i class="fas fa-plus-square"></i> Submit</button>
+            <button class="btn btn-primary" type="submit"><i class="fas fa-pencil-alt"></i> Update</button>
             <a href="#" class="btn btn-warning  m-3">
                 <i class="fas fa-undo"></i> Cancel</a>
         </div>

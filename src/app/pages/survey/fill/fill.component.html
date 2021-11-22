@@ -2,31 +2,178 @@
 
 <div class="container content">
 
-    <h2>survey.title</h2>
-
-    <form  method="post">
+    <h2>{{survey.title}}</h2>
+    <form  method="post" class="text-center bg-dark text-light rounded">
         <!--Repeat for 10 questions-->
-        <div *ngFor='let i of questionsCount' class="container">
+    
             <div class="container">
                 <div>
                     <!--Display the questions-->
-                    <label for="answer{{i+1}}Textfield">Plug in question {{i+1}}: </label>
+                    <label for="answer1Textfield">{{survey.q1}}: </label>
                     <!--Radio options-->
                     <div class="form-check form-check-inline m-3">
-                        <input class="form-check-input" type="radio" name="answerRadio{{i+1}}" id="yesRadio{{i}}" value="yes" >
-                        <label class="form-check-label" for="yesRadio{{i}}">Yes</label>
+                        <input class="form-check-input" type="radio" name="answerRadio1" id="yesRadio1" value="yes" >
+                        <label class="form-check-label" for="yesRadio1">Yes</label>
                     </div>
                     <div class="form-check form-check-inline m-3">
-                        <input class="form-check-input" type="radio" name="answerRadio{{i+1}}" id="noRadio{{i}}" value="no"
+                        <input class="form-check-input" type="radio" name="answerRadio1" id="noRadio1" value="no"
                              required>
-                        <label class="form-check-label" for="noRadio{{i}}">No</label>
+                        <label class="form-check-label" for="noRadio1">No</label>
                     </div>
                 </div>
             </div>
+            <div class="container">
+                <div>
+                    <!--Display the questions-->
+                    <label for="answer2Textfield">{{survey.q2}}: </label>
+                    <!--Radio options-->
+                    <div class="form-check form-check-inline m-3">
+                        <input class="form-check-input" type="radio" name="answerRadio2" id="yesRadio2" value="yes" >
+                        <label class="form-check-label" for="yesRadio2">Yes</label>
+                    </div>
+                    <div class="form-check form-check-inline m-3">
+                        <input class="form-check-input" type="radio" name="answerRadio2" id="noRadio2" value="no"
+                             required>
+                        <label class="form-check-label" for="noRadio2">No</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container">
+                <div>
+                    <!--Display the questions-->
+                    <label for="answer3Textfield">{{survey.q3}}: </label>
+                    <!--Radio options-->
+                    <div class="form-check form-check-inline m-3">
+                        <input class="form-check-input" type="radio" name="answerRadio3" id="yesRadio3" value="yes" >
+                        <label class="form-check-label" for="yesRadio3">Yes</label>
+                    </div>
+                    <div class="form-check form-check-inline m-3">
+                        <input class="form-check-input" type="radio" name="answerRadio3" id="noRadio3" value="no"
+                             required>
+                        <label class="form-check-label" for="noRadio3">No</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container">
+                <div>
+                    <!--Display the questions-->
+                    <label for="answer4Textfield">{{survey.q4}}: </label>
+                    <!--Radio options-->
+                    <div class="form-check form-check-inline m-3">
+                        <input class="form-check-input" type="radio" name="answerRadio4" id="yesRadio4" value="yes" >
+                        <label class="form-check-label" for="yesRadio4">Yes</label>
+                    </div>
+                    <div class="form-check form-check-inline m-3">
+                        <input class="form-check-input" type="radio" name="answerRadio4" id="noRadio4" value="no"
+                             required>
+                        <label class="form-check-label" for="noRadio4">No</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container">
+                <div>
+                    <!--Display the questions-->
+                    <label for="answer5Textfield">{{survey.q5}}: </label>
+                    <!--Radio options-->
+                    <div class="form-check form-check-inline m-3">
+                        <input class="form-check-input" type="radio" name="answerRadio5" id="yesRadio5" value="yes" >
+                        <label class="form-check-label" for="yesRadio5">Yes</label>
+                    </div>
+                    <div class="form-check form-check-inline m-3">
+                        <input class="form-check-input" type="radio" name="answerRadio5" id="noRadio5" value="no"
+                             required>
+                        <label class="form-check-label" for="noRadio5">No</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container">
+                <div>
+                    <!--Display the questions-->
+                    <label for="answer6Textfield">{{survey.q6}}: </label>
+                    <!--Radio options-->
+                    <div class="form-check form-check-inline m-3">
+                        <input class="form-check-input" type="radio" name="answerRadio6" id="yesRadio6" value="yes" >
+                        <label class="form-check-label" for="yesRadio6">Yes</label>
+                    </div>
+                    <div class="form-check form-check-inline m-3">
+                        <input class="form-check-input" type="radio" name="answerRadio6" id="noRadio6" value="no"
+                             required>
+                        <label class="form-check-label" for="noRadio6">No</label>
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div>
+                    <!--Display the questions-->
+                    <label for="answer7Textfield">{{survey.q7}}: </label>
+                    <!--Radio options-->
+                    <div class="form-check form-check-inline m-3">
+                        <input class="form-check-input" type="radio" name="answerRadio7" id="yesRadio7" value="yes" >
+                        <label class="form-check-label" for="yesRadio7">Yes</label>
+                    </div>
+                    <div class="form-check form-check-inline m-3">
+                        <input class="form-check-input" type="radio" name="answerRadio7" id="noRadio7" value="no"
+                             required>
+                        <label class="form-check-label" for="noRadio7">No</label>
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div>
+                    <!--Display the questions-->
+                    <label for="answer8Textfield">{{survey.q8}}: </label>
+                    <!--Radio options-->
+                    <div class="form-check form-check-inline m-3">
+                        <input class="form-check-input" type="radio" name="answerRadio8" id="yesRadio8" value="yes" >
+                        <label class="form-check-label" for="yesRadio8">Yes</label>
+                    </div>
+                    <div class="form-check form-check-inline m-3">
+                        <input class="form-check-input" type="radio" name="answerRadio8" id="noRadio8" value="no"
+                             required>
+                        <label class="form-check-label" for="noRadio8">No</label>
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div>
+                    <!--Display the questions-->
+                    <label for="answer9Textfield">{{survey.q9}}: </label>
+                    <!--Radio options-->
+                    <div class="form-check form-check-inline m-3">
+                        <input class="form-check-input" type="radio" name="answerRadio9" id="yesRadio9" value="yes" >
+                        <label class="form-check-label" for="yesRadio9">Yes</label>
+                    </div>
+                    <div class="form-check form-check-inline m-3">
+                        <input class="form-check-input" type="radio" name="answerRadio9" id="noRadio9" value="no"
+                             required>
+                        <label class="form-check-label" for="noRadio9">No</label>
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div>
+                    <!--Display the questions-->
+                    <label for="answer10Textfield">{{survey.q10}}: </label>
+                    <!--Radio options-->
+                    <div class="form-check form-check-inline m-3">
+                        <input class="form-check-input" type="radio" name="answerRadio10" id="yesRadio10" value="yes" >
+                        <label class="form-check-label" for="yesRadio10">Yes</label>
+                    </div>
+                    <div class="form-check form-check-inline m-3">
+                        <input class="form-check-input" type="radio" name="answerRadio10" id="noRadio10" value="no"
+                             required>
+                        <label class="form-check-label" for="noRadio10">No</label>
+                    </div>
+                </div>
+
         </div>
         <!--Buttons-->
         <div class="container text-center">
-            <button class="btn btn-primary" type="submit"><i class="fas fa-plus-square"></i> Submit</button>
+            <button class="btn btn-primary" type="submit"><i class="fas fa-share-square"></i> Submit</button>
             <a href="#" class="btn btn-warning  m-3">
                 <i class="fas fa-undo"></i> Cancel</a>
         </div>

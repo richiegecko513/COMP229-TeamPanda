@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Survey } from 'src/app/model-2/survey.model';
+import { SurveyRepository } from 'src/app/model-2/survey.repository';
 
 @Component({
   selector: 'app-fill',
@@ -7,12 +9,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FillComponent implements OnInit {
 
-  //constructor() { }
+ 
 
-  
-   questionsCount :number[];
+  constructor(private repository: SurveyRepository) {   }
+
+  //testing the html, the survey should be sent through the route
+  get survey(): Survey{
+ 
+    return this.repository.getSurvey(2);
+ }
+
+
   ngOnInit(): void {
-    this.questionsCount = Array(10).fill(0).map((x,i)=>i);
+   
+    console.log(this.survey.q1);
   }
 
 
