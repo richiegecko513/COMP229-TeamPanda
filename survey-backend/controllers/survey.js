@@ -159,7 +159,7 @@ module.exports.deleteSurvey = (req, res) => {
         }
         else
         {
-            res.jston({success: true, msg: 'Successfully deleted Survey!'});
+            res.json({success: true, msg: 'Successfully deleted Survey!'});
         }       
     })
 };
