@@ -163,3 +163,126 @@ module.exports.deleteSurvey = (req, res) => {
         }       
     })
 };
+
+
+
+// Authentication===========================
+
+let express = require('express');
+let router = express.Router();
+let mongoose = require('mongoose');
+let passport = require('passport');
+
+let userModel = require('../models/user');
+let User = userModel.User;
+
+ 
+module.exports.processLoginPage = (req,res,next)=>{
+    passport.authenticate('local',
+    (err, user, info)=>{
+        console.log(user);
+        //if there is a server error
+        if(err){
+            return next(err);
+        }
+        //if there is a user error
+        if(!user){
+            req.flash('loginMessage', 'Authentication Error');
+
+            //return res.redirect('/api/login');
+            return res.json({sucess:false, msg:"User logged out successfully"});
+
+        }
+
+        req.login(user,(err)=>{
+            console.log("works?")
+            if(err){
+                return next(err);
+
+            }
+            const payload = {
+                id : user._id,
+                username: user.username,
+                email: user.email
+            }
+
+            const authToken = jwt.sign(payload, "SomeSecret", {expiresIn: 604800});
+
+           return res.json({success: true, msg :"Successfully logged in.", user:{
+                id : user._id,
+                username: user.username,
+                email: user.email
+            }, token: authToken});
+        });
+
+
+    })(req,res,next);
+
+
+}
+
+
+
+module.exports.processRegisterPage = (req,res,next) => {
+
+    //instantiate user object
+    let newUser = new User({
+        username: req.body.username,
+        email :req.body.email,
+        displayName : req.body.displayName
+    });
+
+    User.register(newUser, req.body.password,(err)=>{
+        if(err){
+
+            console.log("Error: Inserting New User.")
+            if(err.name =="UserExistsError"){
+
+                req.flash('registerMessage','Registration Error: User Already Exists.');
+                console.log("Error: User Already Exists.")
+
+            }
+            return res.render('auth/register', {
+                title:"Register",
+                message: req.flash('registerMesage'),
+                displayName: req.user ? req.user.displayName :''
+
+            });
+        }
+        else{
+
+            return res.json({sucess:true, msg:"User Registered successfully"});
+
+        }
+    })
+}
+
+
+
+
+module.exports.performLogout = (req,res,next)=>{
+
+    req.logout();
+    //res.redirect('/');
+     return res.json({sucess:true, msg:"User logged out successfully"});
+
+}
+
+
+//checking if we are getting the user collection
+//get all Users 
+exports.getUsers = (req, res) => {
+    User.find((err, userList) =>{
+        if(err)
+        {
+            return console.error(err);
+        }
+        else
+        {
+            res.status(200).json({
+                message: 'All users fetched successfully',
+                UserList: userList
+            });
+        }
+    })
+};
