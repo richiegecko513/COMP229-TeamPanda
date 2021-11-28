@@ -12,7 +12,10 @@ const routes: Routes = [
   {path:'', redirectTo:'/home', pathMatch:'full'},
   {path:'create', component: CreateComponent, data:{title:'Create Survey'}},
   {path: 'survey-list', component: ListComponent, data:{title:'Surveys'}},
-  {path: 'login', component: LoginComponent, data:{title:'Login/Register'}}
+  {path: 'login', component: LoginComponent, data:{title:'Login/Register'}},
+  {path: 'login2', data:{title:'Login'}, redirectTo:'/admin/auth' ,pathMatch:'full'},
+  {path: 'admin', loadChildren:()=> import('./admin/admin.module').then(m=>m.AdminModule)}
+
 ];
 
 @NgModule({
