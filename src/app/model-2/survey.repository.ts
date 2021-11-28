@@ -17,6 +17,7 @@ export class SurveyRepository
         
        dataSource.getActiveSurveys().subscribe(data =>{  
         this.surveys = data;  
+        console.log(this.surveys);
         //get the active surveys
         this.activeSurveys = data.filter(s => s.active == "true");
         //change the active surveys to inactive if the end date equals todays date
