@@ -3,8 +3,12 @@ let router = express.Router();
 
 let surveyController = require('../controllers/survey');
 
+
 //GET route for displaying surveys
-router.get('/survey-list', surveyController.getSurveys);
+router.get('/', surveyController.getSurveys);
+
+//Get route for displaying the users - just to check the user list
+router.get('/users', surveyController.getUsers);
 
 //GET route for displaying create new survey page
 router.get('/create', surveyController.displayCreatePage);
@@ -26,5 +30,18 @@ router.post('/update/:id', surveyController.updateSurvey);
 
 //GET to perform deletion
 router.get('/delete/:id', surveyController.deleteSurvey);
+
+
+//Post route for processing the login page
+router.post('/login', surveyController.processLoginPage)
+
+//Get route for displaying the register page
+//router.get('/register', indexController.displayRegisterPage)
+
+//Post route for processing the register page
+router.post('/register', surveyController.processRegisterPage)
+
+//Get to perform user logout
+router.get('/logout', surveyController.performLogout)
 
 module.exports = router;
