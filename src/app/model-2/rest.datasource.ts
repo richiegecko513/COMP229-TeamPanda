@@ -1,4 +1,4 @@
-import { Injectable } from "@angular/core";
+import { Injectable, NgModule } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { Survey } from "./survey.model";
@@ -8,7 +8,7 @@ import { User } from "./user.model";
 
 
 const PROTOCOL = 'http';
-const PORT = 4200;
+const PORT = 3000;
 
 @Injectable()
 export class RestDataSource {
@@ -28,11 +28,11 @@ export class RestDataSource {
     constructor(private http: HttpClient, private jwtService: JwtHelperService) {
         //user
         this.user = new User();
-        this.baseUrl = `${PROTOCOL}://${location.hostname}:${PORT}/`;
+        this.baseUrl = `${PROTOCOL}://${location.hostname}:${PORT}/api/`;
     }
     getActiveSurveys(): Observable<Survey[]> {
         this.loadToken();
-        return this.http.get<Survey[]>(this.baseUrl + 'survey-list');
+        return this.http.get<Survey[]>(this.baseUrl + '');
     }
 
     createSurvey(survey: Survey): Observable<Survey[]> {
@@ -62,7 +62,7 @@ export class RestDataSource {
 
     loggedIn(): boolean{
 
-        return !    this.jwtService.isTokenExpired(this.authToken);
+        return !this.jwtService.isTokenExpired(this.authToken);
     }
 
     private loadToken(): void {
