@@ -17,6 +17,8 @@ import { DeleteComponent } from './pages/survey/delete/delete.component';
 import { LoginComponent } from './pages/login/login.component';
 import { JwtModule } from '@auth0/angular-jwt';
 
+import { FormsModule } from '@angular/forms';
+
 export function jwtTokenGetter(): string{
   return localStorage.getItem('id_token');
 }
@@ -40,6 +42,7 @@ export function jwtTokenGetter(): string{
     BrowserModule,
     AppRoutingModule,
     ListModule,
+    FormsModule,
     JwtModule.forRoot({
       config:{
         tokenGetter: jwtTokenGetter
