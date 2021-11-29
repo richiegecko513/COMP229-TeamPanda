@@ -12,13 +12,15 @@
         </thead>
         <tbody>
         <!--Repeatable Template Row-->
-          <tr *ngFor='let survey of surveys'>
+          <tr *ngFor='let survey of getSurveys()'>
             <td class="text-center col-4"><a href="/fill/{{survey._id}}">{{survey.title}}</a></td>
             <td class="text-center">
-                <a href="/update/{{survey._id}}" class="btn btn-primary btn-sm"><i class="fas fa-pencil-alt"></i> Update</a>
+                <a (click)='updateSurvey(survey._id)' class="btn btn-primary btn-sm">
+                  <i class="fas fa-pencil-alt"></i> Update</a>
             </td>
             <td class="text-center">
-                <a href="#" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i> Delete</a>
+                <button class="btn btn-danger btn-sm" (click)='deleteSurvey(survey._id)'><i class="fas fa-trash-alt" ></i> Delete
+                </button>
             </td>
           </tr>
         </tbody>
