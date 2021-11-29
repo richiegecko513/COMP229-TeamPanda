@@ -32,13 +32,25 @@ export class RestDataSource {
     }
     getActiveSurveys(): Observable<Survey[]> {
         this.loadToken();
-        return this.http.get<Survey[]>(this.baseUrl + '');
+        return this.http.get<Survey[]>(this.baseUrl + '', this.httpOptions);
     }
 
-    createSurvey(survey: Survey): Observable<Survey[]> {
-        console.log(JSON.stringify(survey));
-        return this.http.post<Survey[]>(this.baseUrl + 'survey-list/create', survey);
+    createSurvey(survey: Survey): Observable<Survey> {
+      
+        return this.http.post<Survey>(this.baseUrl + 'create', survey, this.httpOptions);
     }
+    
+    updateSurvey(survey: Survey): Observable<Survey> {
+        console.log(JSON.stringify(survey));
+        return this.http.post<Survey>(`${this.baseUrl}update/${survey._id}`, survey,  this.httpOptions);
+    }
+    
+    deleteSurvey(id: Number): Observable<Survey> {
+
+        return this.http.get<Survey>(`${this.baseUrl}delete/${id}`, this.httpOptions);
+    }
+    
+
 
     authenticate(user:User): Observable<any>{
 
