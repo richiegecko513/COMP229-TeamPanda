@@ -11,7 +11,7 @@ router.get('/', surveyController.getSurveys);
 router.get('/users', surveyController.getUsers);
 
 //GET route for displaying create new survey page
-router.get('/create', surveyController.displayCreatePage);
+//router.get('/create', surveyController.displayCreatePage);
 
 //POST route for processing create new survey page
 router.post('/create', surveyController.createSurvey);
@@ -23,10 +23,10 @@ router.get('take-survey/:id', surveyController.displaySurvey);
 router.post('take-survey/:id', surveyController.processSurveyPage);
 
 //GET route for displaying update page
-router.get('/update/:id', surveyController.displayUpdatePage);
+//router.get('/update/:id', surveyController.displayUpdatePage);
 
 //POST route for processing udpate page
-router.post('/update/:id', surveyController.updateSurvey);
+router.post('/update/:id', surveyController.processUpdatePage);
 
 //GET to perform deletion
 router.get('/delete/:id', surveyController.deleteSurvey);
