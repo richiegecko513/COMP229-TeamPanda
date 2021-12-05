@@ -24,7 +24,7 @@ let SurveyResponse = mongoose.Schema({
 },
 {
 
-    collection:"survey_response"
+    collection:"survey-response"
 
 });
 
