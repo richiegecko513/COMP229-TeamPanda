@@ -14,16 +14,68 @@ module.exports.getSurveys = (req,res,next)=>{
 
 }
 
-
+//CREATE
+//to do - Reload the page after creating to show new survey
 module.exports.createSurvey = (req,res,next)=>{
 
-   
+    //creating the survey
+    let newSurvey = Survey({
+
+        "title": req.body.title,
+        "lifetime":req.body.lifetime,
+        "active":"true",
+        "dateOpen":"",
+        "dateClosed":"",
+        "q1":req.body.q1,
+        "q2":req.body.q2,
+        "q3":req.body.q3,
+        "q4":req.body.q4,
+        "q5":req.body.q5,
+        "q6":req.body.q6,
+        "q7":req.body.q7,
+        "q8":req.body.q8,
+        "q9":req.body.q9,
+        "q10":req.body.q10
+
+    });
+
+    //DATE
+
+    //create a start date
+    const start = new Date();
+    //extract the data
+    let month = start.getUTCMonth() + 1; 
+    let day = start.getUTCDate();
+    let year = start.getUTCFullYear();
+
+    //put it all together to make year/month/day string format
+    newSurvey.dateOpen = year + "/" + month + "/" + day;
+
+    //make the end date
+    const end = new Date(start);
+    end.setDate(end.getDate()+newSurvey.lifetime);
+    month = end.getUTCMonth() + 1; 
+    day = end.getUTCDate();
+    year = end.getUTCFullYear();
+
+    newSurvey.dateClosed = year + "/" + month + "/" + day;
+
+
+    Survey.create(newSurvey, (err, Survey)=>{
+        if(err){
+            console.log(err);
+            res.end(err);
+
+        }
+        else{ 
+            res.json({success:true, msg:"Successfully Added a Survey"});
+        }
+    })
+
 
 }
 
-
-
-
+//UPDATE
 
 module.exports.updateSurvey = (req,res,next)=>{
 
@@ -88,14 +140,13 @@ module.exports.updateSurvey = (req,res,next)=>{
         else{
             console.log("updated!");
             res.json(updatedSurvey);
+            //res.json({success: true,msg:"Successfully Updated Survey"});
         }
       });
 
 };
 
-
-
-
+//DELETE
 //To do - reload the page after deleting
 module.exports.deleteSurvey = (req,res,next)=>{
 
@@ -108,14 +159,10 @@ module.exports.deleteSurvey = (req,res,next)=>{
         }
         else{
             res.json({success: true, msg:"Successfully deleted Survey"});
+            
         }
         
     });
 
 }
 
-module.exports.displaySurvey = (req,res,next)=>{
-
-   
-
-}
