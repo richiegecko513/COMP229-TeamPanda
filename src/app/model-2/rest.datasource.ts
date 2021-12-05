@@ -5,6 +5,7 @@ import { Survey } from "./survey.model";
 import { map } from "rxjs/operators";
 import { JwtHelperService } from "@auth0/angular-jwt"
 import { User } from "./user.model";
+import { SurveyResponse } from "./survey-response.model";
 
 
 const PROTOCOL = 'http';
@@ -50,6 +51,13 @@ export class RestDataSource {
         return this.http.get<Survey>(`${this.baseUrl}delete/${id}`, this.httpOptions);
     }
     
+
+    //// Response
+
+    saveResponse(response: SurveyResponse): Observable<SurveyResponse> {
+      
+        return this.http.post<SurveyResponse>(this.baseUrl + 'save', response, this.httpOptions);
+    }
 
 
     authenticate(user:User): Observable<any>{
