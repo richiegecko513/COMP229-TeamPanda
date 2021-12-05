@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Survey } from 'src/app/model-2/survey.model';
 import { SurveyRepository } from 'src/app/model-2/survey.repository';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-fill',
@@ -9,20 +10,20 @@ import { SurveyRepository } from 'src/app/model-2/survey.repository';
 })
 export class FillComponent implements OnInit {
 
+  survey: Survey = new Survey();
+
+  constructor(private repository: SurveyRepository,
+              private activeRoute: ActivatedRoute) { 
+              
+      Object.assign(this.survey, repository.getSurvey(activeRoute.snapshot.params.id));  
+  
+}
+
  
-
-  constructor(private repository: SurveyRepository) {   }
-
-  //testing the html, the survey should be sent through the route
-  get survey(): Survey{
- 
-    return this.repository.getSurvey(2);
- }
-
-
   ngOnInit(): void {
    
-    console.log(this.survey.q1);
+    console.log(this.survey);
+    console.log(this.activeRoute.snapshot.params.id);
   }
 
 
