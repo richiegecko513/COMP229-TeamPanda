@@ -41,4 +41,11 @@ export class ListComponent {
 
     this.router.navigateByUrl('/update/'+ id);
   } 
+
+
+  fillSurvey(id: number):void {
+
+    this.router.navigateByUrl('/survey-list/fill/'+ id);
+
+  }
 }
