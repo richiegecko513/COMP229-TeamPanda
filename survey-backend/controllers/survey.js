@@ -96,10 +96,21 @@ module.exports.updateSurvey = (req,res,next)=>{
 
 
 
-
+//To do - reload the page after deleting
 module.exports.deleteSurvey = (req,res,next)=>{
 
-   
+    let id = req.params.id;
+
+    Survey.deleteOne({_id:id}, (err) =>{
+        if (err){
+            console.log(err);
+            res.end(err);
+        }
+        else{
+            res.json({success: true, msg:"Successfully deleted Survey"});
+        }
+        
+    });
 
 }
 
