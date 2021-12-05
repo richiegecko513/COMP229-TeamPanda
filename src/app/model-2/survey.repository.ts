@@ -3,6 +3,7 @@ import { Injectable } from "@angular/core";
 import { Survey } from "./survey.model";
 import {StaticDataSource} from './static.datasource'
 import { RestDataSource } from "./rest.datasource";
+import { SurveyResponse } from "./survey-response.model";
 
 
 
@@ -11,6 +12,8 @@ export class SurveyRepository
 {
     private surveys:Survey[] = [];
     private activeSurveys: Survey[] = [];
+
+    private responses:SurveyResponse[] = [];
     
     constructor(private dataSource: RestDataSource )
     {
@@ -83,6 +86,16 @@ export class SurveyRepository
     this.surveys.splice(this.surveys.findIndex(s => s._id === deletedSurveyId), 1)})
 
     }
+
+
+    saveResponse(savedResponse: SurveyResponse):void{
+
+        this.dataSource.saveResponse(savedResponse).subscribe(b=>{
+                this.responses.push(savedResponse);
+            });
+    }
+       
+
 }
 
 
