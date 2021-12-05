@@ -13,7 +13,7 @@
         <tbody>
         <!--Repeatable Template Row-->
           <tr *ngFor='let survey of getSurveys()'>
-            <td class="text-center col-4"><a href="/fill/{{survey._id}}">{{survey.title}}</a></td>
+            <td class="text-center col-4"><a  (click)='fillSurvey(survey._id)'>{{survey.title}}</a></td>
             <td class="text-center">
                 <a (click)='updateSurvey(survey._id)' class="btn btn-primary btn-sm">
                   <i class="fas fa-pencil-alt"></i> Update</a>
