@@ -3,7 +3,7 @@
 <div class="container content">
 
     <h2>{{survey.title}}</h2>
-    <form  method="post" class="text-center bg-dark text-light rounded">
+    <form  novalidate #form='ngForm' (ngSubmit)='save(form)' class="text-center bg-dark text-light rounded">
         <!--Repeat for 10 questions-->
     
             <div class="container">
