@@ -2,10 +2,11 @@
 /* eslint-disable no-undef */
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+ObjectId = require('mongodb').ObjectId
 
 let Survey = new Schema({
     _id: {
-        type: String
+        type: ObjectId
     },
     title: {
         type: String
