@@ -5,9 +5,9 @@ const Schema = mongoose.Schema;
 ObjectId = require('mongodb').ObjectId
 
 let Survey = new Schema({
-    _id: {
+   /* _id: {
         type: ObjectId
-    },
+    },*/
     title: {
         type: String
     },
