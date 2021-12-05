@@ -13,30 +13,27 @@ import { SurveyResponse } from 'src/app/model-2/survey-response.model';
 export class FillComponent implements OnInit {
 
   survey: Survey = new Survey();
-
   response: SurveyResponse = new SurveyResponse();
 
   constructor(private repository: SurveyRepository,
-              private activeRoute: ActivatedRoute,  private router: Router) { 
-              
-      Object.assign(this.survey, repository.getSurvey(activeRoute.snapshot.params.id));  
+              private activeRoute: ActivatedRoute,  
+              private router: Router) { 
+    //Assign the survey by id to display the proper questions
+    Object.assign(this.survey, repository.getSurvey(activeRoute.snapshot.params.id));  
   
-}
+  }
 
- 
   ngOnInit(): void {
-   
+    
     console.log(this.survey);
     console.log(this.activeRoute.snapshot.params.id);
   }
 
   save(form: NgForm): void{
 
+    this.response.title = this.survey.title;
     this.repository.saveResponse(this.response);
-    //SAVE response
-    this.router.navigateByUrl('/survey-list')
-
+    this.router.navigateByUrl('/survey-list');
   }
-
 
 }
