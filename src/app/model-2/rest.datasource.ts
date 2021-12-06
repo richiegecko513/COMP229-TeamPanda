@@ -62,8 +62,8 @@ export class RestDataSource {
 
     //AUTHENTICATION
 
-    register(user:User):Observable<User>{
-        return this.http.post<User>(this.baseUrl + 'register', user, this.httpOptions);
+    register(user:User):Observable<any>{
+        return this.http.post<any>(this.baseUrl + 'register', user, this.httpOptions);
         
     }
 
