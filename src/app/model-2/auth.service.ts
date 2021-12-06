@@ -35,11 +35,9 @@ export class AuthService{
     }
 
 
-    register(createdUser: User):void{
+    register(createdUser: User):Observable<any>{
 
-        this.datasource.register(createdUser).subscribe(u=>{
-            this.users.push(createdUser);
-        });
+        return this.datasource.register(createdUser);
 
     }
 
