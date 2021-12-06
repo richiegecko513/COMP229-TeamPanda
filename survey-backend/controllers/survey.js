@@ -82,7 +82,6 @@ module.exports.updateSurvey = (req,res,next)=>{
 
     //getting the id from the request
     let id = req.params.id;
-    console.log(id);
 
     //creating the survey
     let updatedSurvey = Survey({
@@ -130,8 +129,6 @@ module.exports.updateSurvey = (req,res,next)=>{
       //putting the elements together
       updatedSurvey.dateClosed = year + "/" + month + "/" + day;
 
-      console.log(updatedSurvey);
-
       //Updating the survey record
       Survey.updateOne({_id:id}, updatedSurvey,(err)=>{
         if(err){
@@ -164,5 +161,140 @@ module.exports.deleteSurvey = (req,res,next)=>{
         
     });
 
+};
+
+//=============== AUTH ======================
+
+let express = require('express');
+let router = express.Router();
+let mongoose = require('mongoose');
+let passport = require('passport');
+
+// enable jwt
+let jwt = require('jsonwebtoken');
+let DB = require('../config/db');
+
+let userModel = require('../models/user');
+let User = userModel.User;
+
+
+module.exports.performLogin = (req,res,next)=>{
+
+
+    passport.authenticate('local',
+    (err, user, info)=>
+    {
+
+        //if there is a server error
+        if(err){
+            return next(err);
+            
+        }
+        //if there is a user error
+        if(!user){
+
+            console.log("could not authenticate")
+            return res.json({success:false, msg:"Could not Authenticate - User Error"});
+
+        }
+
+        req.login(user,(err)=>{
+
+            if(err){
+                return next(err);
+
+            }
+            const payload = {
+                _id : user._id,
+                username: user.username,
+                email: user.email,
+            }
+
+            const authToken = jwt.sign(payload, DB.Secret, {expiresIn: 604800});
+
+            return res.json({success: true, msg :"Successfully logged in.", user:{
+                _id : user._id,
+                username: user.username,
+                email: user.email
+            }, token: authToken});
+        });
+
+
+    })(req,res,next);
+
+
+};
+
+
+module.exports.find = (req,res,next)=>{
+
+
+    id = req.params.id;
+
+    User.findById(2, function (err, docs) {
+        if (err){
+            console.log(err);
+        }
+        else{
+            console.log("Result : ", docs);
+        }
+    });
+
+
+
 }
 
+
+
+
+
+module.exports.processRegisterPage = (req,res,next) => {
+
+    //instantiate user object
+    let newUser = new User({
+        username: req.body.username,
+        email :req.body.email,
+    });
+
+    User.register(newUser, req.body.password,(err)=>{
+        if(err){
+
+            console.log("Error: Inserting New User.")
+            if(err.name =="UserExistsError"){
+
+                //req.flash('registerMessage','Registration Error: User Already Exists.');
+                console.log("Error: User Already Exists.")
+                return res.json({success:false, msg:"User Already Exists"});
+
+            }
+            return res.json({success:false, msg:"User Failed to Registered"});
+        }
+        else{
+
+            console.log("sucesss")
+            return res.json({success:true, msg:"User Registered successfully"});
+
+        }
+    })
+}
+
+
+
+//checking if we are getting the user collection
+//get all Users 
+exports.getUsers = (req, res, next) => {
+
+    User.find((err, userList) =>{
+        if(err)
+        {
+            return console.error(err);
+        }
+        else
+        {
+            res.status(200).json({
+                message: 'All users fetched successfully',
+                UserList: userList
+            });
+        }
+    })
+};
