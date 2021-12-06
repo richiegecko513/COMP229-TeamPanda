@@ -1,4 +1,4 @@
-import { Injectable, NgModule } from "@angular/core";
+import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { Survey } from "./survey.model";
@@ -14,10 +14,10 @@ const PORT = 3000;
 @Injectable()
 export class RestDataSource {
 
-    //user
     user: User;
     baseUrl: string;
     authToken: string;
+
     private httpOptions =
         {
             headers: new HttpHeaders({
@@ -26,11 +26,13 @@ export class RestDataSource {
                 'Access-control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept'
             })
         };
+
     constructor(private http: HttpClient, private jwtService: JwtHelperService) {
-        //user
+       
         this.user = new User();
         this.baseUrl = `${PROTOCOL}://${location.hostname}:${PORT}/api/`;
     }
+
     getActiveSurveys(): Observable<Survey[]> {
         this.loadToken();
         return this.http.get<Survey[]>(this.baseUrl + '', this.httpOptions);
@@ -50,44 +52,53 @@ export class RestDataSource {
 
         return this.http.get<Survey>(`${this.baseUrl}delete/${id}`, this.httpOptions);
     }
-    
 
-    //// Response
+    // SURVEY RESPONSE
 
     saveResponse(response: SurveyResponse): Observable<SurveyResponse> {
       
         return this.http.post<SurveyResponse>(this.baseUrl + 'save', response, this.httpOptions);
     }
 
+    //AUTHENTICATION
 
-    authenticate(user:User): Observable<any>{
-
-        return this.http.post<any>(this.baseUrl + 'login', user, this.httpOptions)
+    register(user:User):Observable<User>{
+        return this.http.post<User>(this.baseUrl + 'register', user, this.httpOptions);
+        
     }
 
-    storeUserData(token: any, user: User): void{
-        localStorage.setItem('id_token', 'Bearer' + token);
+    authenticate(user: User): Observable<any>{
+
+        return this.http.post<any>(this.baseUrl + 'login', user, this.httpOptions);
+    }
+  
+    storeUserData(token: any, user: User): void {
+
+        localStorage.setItem('id_token', 'Bearer ' + token);
         localStorage.setItem('user', JSON.stringify(user));
         this.authToken = token;
         this.user = user;
     }
-
+  
     logout(): Observable<any>{
+
         this.authToken = null;
         this.user = null;
         localStorage.clear();
-        return this.http.get<any>(this.baseUrl+'logout', this.httpOptions);
-
+    
+        return this.http.get<any>(this.baseUrl + 'logout', this.httpOptions);
     }
-
+  
     loggedIn(): boolean{
-
+        
         return !this.jwtService.isTokenExpired(this.authToken);
     }
+  
+    private loadToken(): void{
 
-    private loadToken(): void {
         const token = localStorage.getItem('id_token');
         this.authToken = token;
         this.httpOptions.headers = this.httpOptions.headers.set('Authorization', this.authToken);
     }
+
 }
