@@ -2,3 +2,7 @@
     padding-bottom: 10%;
 
 }
+
+.clickable:hover{
+    cursor:pointer;
+}
