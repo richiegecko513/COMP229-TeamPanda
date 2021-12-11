@@ -9,7 +9,8 @@ import { User } from "./user.model";
 export class AuthService{
 
     user: User;
-    
+    users: User[] = [];
+
     constructor(private datasource :RestDataSource){
 
         this.user = new User();
@@ -31,6 +32,13 @@ export class AuthService{
     get authenticated(): boolean {
 
         return this.datasource.loggedIn();
+    }
+
+
+    register(createdUser: User):Observable<any>{
+
+        return this.datasource.register(createdUser);
+
     }
 
 

@@ -13,13 +13,14 @@ import { CreateComponent } from './pages/survey/create/create.component';
 import { UpdateComponent } from './pages/survey/update/update.component';
 import { FillComponent } from './pages/survey/fill/fill.component';
 import { ListModule } from './pages/survey/list/list.module';
-import { DeleteComponent } from './pages/survey/delete/delete.component';
 import { LoginComponent } from './pages/login/login.component';
-import { JwtModule } from '@auth0/angular-jwt';
+//import { JwtModule } from '@auth0/angular-jwt';
+import { JwtModule, JwtHelperService, JwtInterceptor } from '@auth0/angular-jwt';
 
 import { FormsModule } from '@angular/forms';
 
-export function jwtTokenGetter(): string{
+export function jwtTokenGetter(): string
+{
   return localStorage.getItem('id_token');
 }
 
@@ -35,7 +36,6 @@ export function jwtTokenGetter(): string{
     CreateComponent,
     UpdateComponent,
     FillComponent,
-    DeleteComponent,
     LoginComponent
   ],
   imports: [
@@ -43,8 +43,9 @@ export function jwtTokenGetter(): string{
     AppRoutingModule,
     ListModule,
     FormsModule,
+
     JwtModule.forRoot({
-      config:{
+      config: {
         tokenGetter: jwtTokenGetter
       }
     })

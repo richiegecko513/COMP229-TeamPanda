@@ -1,13 +1,12 @@
 /* eslint-disable no-undef */
 let express = require('express');
-    path = require('path');
-    mongoose = require('mongoose');
-    cors = require('cors');
-    let logger = require('morgan');
-    DB = require('./db')
-    bodyParser = require('body-parser');
-    createError = require('http-errors')
+let cors = require('cors');
+let logger = require('morgan');
+let cookieParser = require('cookie-parser');
 
+//let bodyParser = require('body-parser');
+//let createError = require('http-errors')
+//let path = require('path');
 
 //modules for authentication
 let session = require('express-session');
@@ -22,34 +21,36 @@ let localStrategy = passportLocal.Strategy;
 let flash = require('connect-flash');
 
 
+//database set up 
+let DB = require('./db')
+let mongoose = require('mongoose');
 
-mongoose.connect(DB.URI, 
-  {useNewUrlParser: true,
-    useUnifiedTopology: true
-  }, (err) => {
+mongoose.connect(DB.URI, {useNewUrlParser: true, useUnifiedTopology: true}, (err) => {
     if (!err) {
       console.log('MongoDB Connection Succeeded.')
-  } else {
+    } else {
       console.log('Error in DB connection: ' + err)
-  }
-  }
-  );
+    }
+});
 
-// let mongoDB = mongoose.connection;
-// mongoDB.on('error', console.error.bind(console, 'Connection Error:'));
-// mongoDB.once('open', ()=>{
-//   console.log('Connected to MongoDB...');
-// });
 
 let surveyRouter = require('../routes/survey');
 
 const app = express();
 
+/*
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
   extended: false
 }));
+*/
+
+app.use(logger('dev')); 
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
+
 app.use(cors());
 
 
@@ -58,7 +59,7 @@ app.use(session({
   secret:"SomeSecret",
   saveUninitialized: false,
   resave: false
-}))
+}));
 
 app.use(flash());
 app.use(passport.initialize());
@@ -72,24 +73,22 @@ let User = userModel.User;
 
 passport.use(User.createStrategy())
 
-app.use(passport.initialize());
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
 
-let jwtOptions ={ secret:"SomeSecret"};
+let jwtOptions = {};
 jwtOptions.jwtFromRequest = ExtractJWT.fromAuthHeaderAsBearerToken();
+jwtOptions.secretOrKey = DB.Secret;
 
-jwtOptions.secretOrKey = "SomeSecret";
-
-
-let strategy = new JWTStrategy(jwtOptions,(jwt_payload, done)=>{
-  User.findById(jwt_payload.id).then(user=>{
-    return done(null,user)
-  })
-  .catch(err=>{
-    return done(err, false)
-  });
+let strategy = new JWTStrategy(jwtOptions, (jwt_payload, done) => {
+  User.findById(jwt_payload.id)
+    .then(user => {
+      return done(null, user);
+    })
+    .catch(err => {
+      return done(err, false);
+    });
 });
 
 passport.use(strategy);
@@ -105,20 +104,21 @@ app.listen(port, () => {
   console.log('Listening on port ' + port)
 })
 
+/*
 // catch 404 and forward to error handler
-// app.use(function(req, res, next) {
-//   next(createError(404));
-// });
+ app.use(function(req, res, next) {
+   next(createError(404));
+ });
 
 // error handler
-// app.use(function(err, req, res, next) {
-//   // set locals, only providing error in development
-//   res.locals.message = err.message;
-//   res.locals.error = req.app.get('env') === 'development' ? err : {};
+  app.use(function(err, req, res, next) {
+   // set locals, only providing error in development
+   res.locals.message = err.message;
+   res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-  // render the error page
-//   res.status(err.status || 500);
-//   res.render('error', { title: 'Error'});
-// });
-
+//   render the error page
+   res.status(err.status || 500);
+   res.render('error', { title: 'Error'});
+ });
+*/
 module.exports = app;
