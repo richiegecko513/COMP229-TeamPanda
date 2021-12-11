@@ -17,12 +17,14 @@ export class SurveyRepository
         
        dataSource.getActiveSurveys().subscribe(data =>{  
         this.surveys = data;  
+        
         //get the active surveys
         this.activeSurveys = data.filter(s => s.active == "true");
         //change the active surveys to inactive if the end date equals todays date
         this.checkActive();
         //reassign the active surveys
         this.activeSurveys = data.filter(s => s.active == "true");
+        console.log(this.activeSurveys);
         });
      
     }
@@ -60,7 +62,27 @@ export class SurveyRepository
 
     }
     
+    saveSurvey( savedSurvey: Survey):void{
+
+        if(savedSurvey._id === null|| savedSurvey._id === 0 || savedSurvey._id === undefined){
+            this.dataSource.createSurvey(savedSurvey).subscribe(b=>{
+                this.surveys.push(savedSurvey);
+            });
+        }
+        else{
+            this.dataSource.updateSurvey(savedSurvey).subscribe(survey =>{
+                this.surveys.splice(this.surveys.findIndex(s => s._id === savedSurvey._id), 1, savedSurvey)
+            });
+        }
+    }
+ 
     
+    deleteSurvey(deletedSurveyId : number):void{
+
+        this.dataSource.deleteSurvey(deletedSurveyId).subscribe(survey =>{
+    this.surveys.splice(this.surveys.findIndex(s => s._id === deletedSurveyId), 1)})
+
+    }
 }
 
 

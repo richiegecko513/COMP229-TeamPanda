@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { RestDataSource } from 'src/app/model-2/rest.datasource';
 
-//!!!!!!!!!!!!!!!!!!! the path might be wrong
+
 import { Survey } from 'src/app/model-2/survey.model';
 import { SurveyRepository } from 'src/app/model-2/survey.repository';
 
@@ -11,18 +13,32 @@ import { SurveyRepository } from 'src/app/model-2/survey.repository';
 })
 export class ListComponent {
 
-  constructor(private repository: SurveyRepository) { }
+  surveys: Survey[];
+  constructor(private repository: SurveyRepository, private datasource: RestDataSource, private router: Router) { }
 
-  get surveys(): Survey[]{
- 
-     return this.repository.getActiveSurveys( );
+  getSurveys(): Survey[]{
+      return this.repository.getActiveSurveys( );
   }
 
   //use to check whether the page is getting the data
   ngOnInit(): void {
-    console.log(this.surveys.length);  
+    //console.log(this.surveys.length);  
   }
 
 
+  deleteSurvey(id : number): void{
+    console.log("here")
+    if(confirm('Are you sure')){
+      this.repository.deleteSurvey(id);
+    }
+    else{
+      this.router.navigateByUrl('/survey-list')
+    }
 
+  }
+
+  updateSurvey(id: number):void{
+
+    this.router.navigateByUrl('/update/'+ id);
+  } 
 }

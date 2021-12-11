@@ -8,6 +8,21 @@ let express = require('express');
     bodyParser = require('body-parser');
     createError = require('http-errors')
 
+
+//modules for authentication
+let session = require('express-session');
+let passport = require('passport');
+
+let passportJWT = require('passport-jwt');
+let JWTStrategy = passportJWT.Strategy;
+let ExtractJWT = passportJWT.ExtractJwt;
+
+let passportLocal = require('passport-local');
+let localStrategy = passportLocal.Strategy;
+let flash = require('connect-flash');
+
+
+
 mongoose.connect(DB.URI, 
   {useNewUrlParser: true,
     useUnifiedTopology: true
@@ -36,6 +51,48 @@ app.use(bodyParser.urlencoded({
   extended: false
 }));
 app.use(cors());
+
+
+//setup express session
+app.use(session({
+  secret:"SomeSecret",
+  saveUninitialized: false,
+  resave: false
+}))
+
+app.use(flash());
+app.use(passport.initialize());
+app.use(passport.session());
+
+
+//create model instance
+let userModel = require('../models/user');
+let User = userModel.User;
+
+
+passport.use(User.createStrategy())
+
+app.use(passport.initialize());
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
+
+let jwtOptions ={ secret:"SomeSecret"};
+jwtOptions.jwtFromRequest = ExtractJWT.fromAuthHeaderAsBearerToken();
+
+jwtOptions.secretOrKey = "SomeSecret";
+
+
+let strategy = new JWTStrategy(jwtOptions,(jwt_payload, done)=>{
+  User.findById(jwt_payload.id).then(user=>{
+    return done(null,user)
+  })
+  .catch(err=>{
+    return done(err, false)
+  });
+});
+
+passport.use(strategy);
 
 
 //routing

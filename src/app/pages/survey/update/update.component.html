@@ -1,107 +1,112 @@
 <app-basepage></app-basepage>
 
-<div class="container content ">
-    <form  method="post">
-        <!--The Survey title and the Lifetime-->
-        <div class="container row m-3 pb-5 ">
-            <div class="input-group col ">
-                <span class="input-group-text">Survey Name</span>
-                <input type="text" class="form-control" id="surveyTitle" name="surveyTitle"  value="{{survey.title}}" required>
-            </div>
-            <div class="input-group col ">
-                <span class="input-group-text">Survey Lifetime</span>
-                <input type="text" class="form-control" id="surveyLifetime" name="surveyLifetime"  value="{{survey.lifetime}}"  min="1" max="20" required>
-                <span class="input-group-text">Days</span>
-            </div>
-        </div>
 
-        <!-- 10 questions-->
-        <div  class="container">
-            <div class="container">
-                <!--Customize the question text-->
-                <div class="input-group mb-3 m-3" id="question">
-                    <span class="input-group-text">1</span>
-                    <input type="text" class="form-control" id="question1Textfield" name="question1" value="Plug in  {{survey.q1}}" required>
-                </div>
-            </div>
+<div class="bg-primary p-2 text-white"
+    [class.bg-warning]='updating'
+    [class.text-dark]='updating'>
 
-
-            <div class="container">
-                <!--Customize the question text-->
-                <div class="input-group mb-3 m-3" id="question">
-                    <span class="input-group-text">2</span>
-                    <input type="text" class="form-control" id="question2Textfield" name="question2" value="Plug in  {{survey.q2}}" required>
-                </div>
-            </div>
-            <div class="container">
-                <!--Customize the question text-->
-                <div class="input-group mb-3 m-3" id="question">
-                    <span class="input-group-text">3</span>
-                    <input type="text" class="form-control" id="question3Textfield" name="question3" value="Plug in  {{survey.q3}}" required>
-                </div>
-            </div>
-            <div class="container">
-                <!--Customize the question text-->
-                <div class="input-group mb-3 m-3" id="question">
-                    <span class="input-group-text">4</span>
-                    <input type="text" class="form-control" id="question4Textfield" name="question4" value="Plug in  {{survey.q4}}" required>
-                </div>
-            </div>
-            <div class="container">
-                <!--Customize the question text-->
-                <div class="input-group mb-3 m-3" id="question">
-                    <span class="input-group-text">5</span>
-                    <input type="text" class="form-control" id="question5Textfield" name="question5" value="Plug in  {{survey.q5}}" required>
-                </div>
-            </div>
-            <div class="container">
-                <!--Customize the question text-->
-                <div class="input-group mb-3 m-3" id="question">
-                    <span class="input-group-text">6</span>
-                    <input type="text" class="form-control" id="question6Textfield" name="question6" value="Plug in  {{survey.q6}}" required>
-                </div>
-            </div>
-            <div class="container">
-                <!--Customize the question text-->
-                <div class="input-group mb-3 m-3" id="question">
-                    <span class="input-group-text">7</span>
-                    <input type="text" class="form-control" id="question7Textfield" name="question7" value="Plug in  {{survey.q7}}" required>
-                </div>
-            </div>
-            <div class="container">
-                <!--Customize the question text-->
-                <div class="input-group mb-3 m-3" id="question">
-                    <span class="input-group-text">8</span>
-                    <input type="text" class="form-control" id="question8Textfield" name="question8" value="Plug in  {{survey.q8}}" required>
-                </div>
-            </div>
-            <div class="container">
-                <!--Customize the question text-->
-                <div class="input-group mb-3 m-3" id="question">
-                    <span class="input-group-text">9</span>
-                    <input type="text" class="form-control" id="question9Textfield" name="question9" value="Plug in  {{survey.q9}}" required>
-                </div>
-            </div>
-            <div class="container">
-                <!--Customize the question text-->
-                <div class="input-group mb-3 m-3" id="question">
-                    <span class="input-group-text">10</span>
-                    <input type="text" class="form-control" id="question10Textfield" name="question10" value="Plug in  {{survey.q10}}" required>
-                </div>
-            </div>
-        </div>
-
-
-
-
-
-
-        <!--Buttons-->
-        <div class="container text-center">
-            <button class="btn btn-primary" type="submit"><i class="fas fa-pencil-alt"></i> Update</button>
-            <a href="#" class="btn btn-warning  m-3">
-                <i class="fas fa-undo"></i> Cancel</a>
-        </div>
-    </form>
-  
+    <h5>{{updating ? 'Update' : 'Create'}} Survey</h5>
 </div>
+
+<form novalidate #form='ngForm' (ngSubmit)='save(form)'>
+    <div class="container row m-3 pb-5 ">
+        
+        <div class="input-group col ">
+            <span class="input-group-text">Survey Name</span>
+            <input type="text" class="form-control" id="surveyTitle" name="surveyTitle" required [(ngModel)]='survey.title'>
+        </div>
+
+        <div class="input-group col ">
+            <span class="input-group-text">Survey Lifetime</span>
+            <input type="number" class="form-control" id="surveyLifetime" name="surveyLifetime" min="1" max="20" required [(ngModel)]='survey.lifetime'>
+            <span class="input-group-text">Days</span>
+        </div>
+
+    </div>
+
+
+    <!--10 questions-->
+    <div class="container">
+        <!--Customize the question text-->
+        <div class="input-group mb-3 m-3" id="question">
+            <span class="input-group-text">1</span>
+            <input type="text" class="form-control" id="question1Textfield" name="question1"  required [(ngModel)]='survey.q1'>
+        </div>
+    </div>
+
+
+    <div class="container">
+        <!--Customize the question text-->
+        <div class="input-group mb-3 m-3" id="question">
+            <span class="input-group-text">2</span>
+            <input type="text" class="form-control" id="question2Textfield" name="question2"  required [(ngModel)]='survey.q2'>
+        </div>
+    </div>
+    <div class="container">
+        <!--Customize the question text-->
+        <div class="input-group mb-3 m-3" id="question">
+            <span class="input-group-text">3</span>
+            <input type="text" class="form-control" id="question3Textfield" name="question3"  required [(ngModel)]='survey.q3'>
+        </div>
+    </div>
+    <div class="container">
+        <!--Customize the question text-->
+        <div class="input-group mb-3 m-3" id="question">
+            <span class="input-group-text">4</span>
+            <input type="text" class="form-control" id="question4Textfield" name="question4"  required [(ngModel)]='survey.q4'>
+        </div>
+    </div>
+    <div class="container">
+        <!--Customize the question text-->
+        <div class="input-group mb-3 m-3" id="question">
+            <span class="input-group-text">5</span>
+            <input type="text" class="form-control" id="question5Textfield" name="question5" required [(ngModel)]='survey.q5'>
+        </div>
+    </div>
+    <div class="container">
+        <!--Customize the question text-->
+        <div class="input-group mb-3 m-3" id="question">
+            <span class="input-group-text">6</span>
+            <input type="text" class="form-control" id="question6Textfield" name="question6"  required [(ngModel)]='survey.q6'>
+        </div>
+    </div>
+    <div class="container">
+        <!--Customize the question text-->
+        <div class="input-group mb-3 m-3" id="question">
+            <span class="input-group-text">7</span>
+            <input type="text" class="form-control" id="question7Textfield" name="question7"  required [(ngModel)]='survey.q7'>
+        </div>
+    </div>
+    <div class="container">
+        <!--Customize the question text-->
+        <div class="input-group mb-3 m-3" id="question">
+            <span class="input-group-text">8</span>
+            <input type="text" class="form-control" id="question8Textfield" name="question8"  required [(ngModel)]='survey.q8'>
+        </div>
+    </div>
+    <div class="container">
+        <!--Customize the question text-->
+        <div class="input-group mb-3 m-3" id="question">
+            <span class="input-group-text">9</span>
+            <input type="text" class="form-control" id="question9Textfield" name="question9" required [(ngModel)]='survey.q9'>
+        </div>
+    </div>
+    <div class="container">
+        <!--Customize the question text-->
+        <div class="input-group mb-3 m-3" id="question">
+            <span class="input-group-text">10</span>
+            <input type="text" class="form-control" id="question10Textfield" name="question10" required [(ngModel)]='survey.q10'>
+        </div>
+    </div>
+
+    <!--Buttons-->
+    <div class="container text-center">
+        <button class="btn btn-primary" [class.btn-warning]='updating' type="submit" ><i class="{{updating ? 'fas fa-save': 'fas fa-plus-circle'}}" ></i> {{updating ? "Update": "Create"}}
+        </button>
+        <a  routerLink="/survey-list" type="reset" class="btn btn-warning  m-3">
+            <i class="fas fa-undo"></i> Cancel</a>
+    </div>
+
+</form>
+
+

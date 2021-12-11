@@ -1,14 +1,20 @@
-import { Injectable } from "@angular/core";
+import { Injectable, NgModule } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { Survey } from "./survey.model";
+import { map } from "rxjs/operators";
 import { JwtHelperService } from "@auth0/angular-jwt"
+import { User } from "./user.model";
+
 
 const PROTOCOL = 'http';
-const PORT = 4200;
+const PORT = 3000;
 
 @Injectable()
 export class RestDataSource {
+
+    //user
+    user: User;
     baseUrl: string;
     authToken: string;
     private httpOptions =
@@ -20,16 +26,57 @@ export class RestDataSource {
             })
         };
     constructor(private http: HttpClient, private jwtService: JwtHelperService) {
-        this.baseUrl = `${PROTOCOL}://${location.hostname}:${PORT}/`;
+        //user
+        this.user = new User();
+        this.baseUrl = `${PROTOCOL}://${location.hostname}:${PORT}/api/`;
     }
     getActiveSurveys(): Observable<Survey[]> {
-        return this.http.get<Survey[]>(this.baseUrl + 'survey-list');
+        this.loadToken();
+        return this.http.get<Survey[]>(this.baseUrl + '', this.httpOptions);
     }
 
-    createSurvey(survey: Survey): Observable<Survey[]> {
-        console.log(JSON.stringify(survey));
-        return this.http.post<Survey[]>(this.baseUrl + 'survey-list/create', survey);
+    createSurvey(survey: Survey): Observable<Survey> {
+      
+        return this.http.post<Survey>(this.baseUrl + 'create', survey, this.httpOptions);
     }
+    
+    updateSurvey(survey: Survey): Observable<Survey> {
+        console.log(JSON.stringify(survey));
+        return this.http.post<Survey>(`${this.baseUrl}update/${survey._id}`, survey,  this.httpOptions);
+    }
+    
+    deleteSurvey(id: Number): Observable<Survey> {
+
+        return this.http.get<Survey>(`${this.baseUrl}delete/${id}`, this.httpOptions);
+    }
+    
+
+
+    authenticate(user:User): Observable<any>{
+
+        return this.http.post<any>(this.baseUrl + 'login', user, this.httpOptions)
+    }
+
+    storeUserData(token: any, user: User): void{
+        localStorage.setItem('id_token', 'Bearer' + token);
+        localStorage.setItem('user', JSON.stringify(user));
+        this.authToken = token;
+        this.user = user;
+    }
+
+    logout(): Observable<any>{
+        this.authToken = null;
+        this.user = null;
+        localStorage.clear();
+        return this.http.get<any>(this.baseUrl+'logout', this.httpOptions);
+
+    }
+
+    loggedIn(): boolean{
+
+        return !this.jwtService.isTokenExpired(this.authToken);
+    }
+
     private loadToken(): void {
         const token = localStorage.getItem('id_token');
         this.authToken = token;
