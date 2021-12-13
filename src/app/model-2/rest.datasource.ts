@@ -2,7 +2,6 @@ import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { Survey } from "./survey.model";
-import { map } from "rxjs/operators";
 import { JwtHelperService } from "@auth0/angular-jwt"
 import { User } from "./user.model";
 import { SurveyResponse } from "./survey-response.model";
@@ -34,22 +33,22 @@ export class RestDataSource {
     }
 
     getActiveSurveys(): Observable<Survey[]> {
-        this.loadToken();
         return this.http.get<Survey[]>(this.baseUrl + '', this.httpOptions);
     }
 
     createSurvey(survey: Survey): Observable<Survey> {
-      
+        this.loadToken();
         return this.http.post<Survey>(this.baseUrl + 'create', survey, this.httpOptions);
     }
     
     updateSurvey(survey: Survey): Observable<Survey> {
+        this.loadToken();
         console.log(JSON.stringify(survey));
         return this.http.post<Survey>(`${this.baseUrl}update/${survey._id}`, survey,  this.httpOptions);
     }
     
     deleteSurvey(id: Number): Observable<Survey> {
-
+        this.loadToken();
         return this.http.get<Survey>(`${this.baseUrl}delete/${id}`, this.httpOptions);
     }
 
@@ -85,12 +84,10 @@ export class RestDataSource {
         this.authToken = null;
         this.user = null;
         localStorage.clear();
-    
         return this.http.get<any>(this.baseUrl + 'logout', this.httpOptions);
     }
   
     loggedIn(): boolean{
-        
         return !this.jwtService.isTokenExpired(this.authToken);
     }
   
