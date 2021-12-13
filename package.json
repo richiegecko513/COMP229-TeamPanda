@@ -8,8 +8,7 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "lint": "eslint",
-    "json": "json-server data.js -p 3500 -m authMiddleware.js",
-    "heroku-postbuild": "ng build --prod"
+    "json": "json-server data.js -p 3500 -m authMiddleware.js"
   },
   "engines": {
     "node": "16.13.0",
