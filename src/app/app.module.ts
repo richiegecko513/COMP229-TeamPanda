@@ -10,14 +10,13 @@ import { BasepageComponent } from './partials/basepage/basepage.component';
 import { HomeComponent } from './pages/home/home.component';
 import { ListComponent } from './pages/survey/list/list.component';
 import { CreateComponent } from './pages/survey/create/create.component';
-import { UpdateComponent } from './pages/survey/update/update.component';
 import { FillComponent } from './pages/survey/fill/fill.component';
 import { ListModule } from './pages/survey/list/list.module';
 import { LoginComponent } from './pages/login/login.component';
-//import { JwtModule } from '@auth0/angular-jwt';
-import { JwtModule, JwtHelperService, JwtInterceptor } from '@auth0/angular-jwt';
+import { JwtModule} from '@auth0/angular-jwt';
 
 import { FormsModule } from '@angular/forms';
+import { AuthGuard } from './admin/auth/auth.guard';
 
 export function jwtTokenGetter(): string
 {
@@ -34,7 +33,6 @@ export function jwtTokenGetter(): string
     HomeComponent,
     ListComponent,
     CreateComponent,
-    UpdateComponent,
     FillComponent,
     LoginComponent
   ],
@@ -50,7 +48,7 @@ export function jwtTokenGetter(): string
       }
     })
   ],
-  providers: [],
+  providers: [AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

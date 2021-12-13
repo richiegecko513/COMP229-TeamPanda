@@ -6,19 +6,19 @@
           <!--Header row-->
           <tr>
             <th scope="col-4" class="text-center">Survey Name</th>
-            <th scope="col"></th>
-            <th scope="col"></th>
+            <th *ngIf='isLoggedIn()' scope="col"></th>
+            <th *ngIf='isLoggedIn()' scope="col"></th>
           </tr>
         </thead>
         <tbody>
         <!--Repeatable Template Row-->
           <tr *ngFor='let survey of getSurveys()'>
             <td class="text-center col-4"><a  (click)='fillSurvey(survey._id)' class="clickable">{{survey.title}}</a></td>
-            <td class="text-center">
+            <td *ngIf='isLoggedIn()' class="text-center">
                 <a (click)='updateSurvey(survey._id)' class="btn btn-primary btn-sm">
                   <i class="fas fa-pencil-alt"></i> Update</a>
             </td>
-            <td class="text-center">
+            <td *ngIf='isLoggedIn()'  class="text-center">
                 <button class="btn btn-danger btn-sm" (click)='deleteSurvey(survey._id)'><i class="fas fa-trash-alt" ></i> Delete
                 </button>
             </td>

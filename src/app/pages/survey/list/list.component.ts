@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/model-2/auth.service';
 import { RestDataSource } from 'src/app/model-2/rest.datasource';
 
 
@@ -14,7 +15,7 @@ import { SurveyRepository } from 'src/app/model-2/survey.repository';
 export class ListComponent {
 
   surveys: Survey[];
-  constructor(private repository: SurveyRepository, private datasource: RestDataSource, private router: Router) { }
+  constructor(private repository: SurveyRepository, private datasource: RestDataSource, private router: Router, private authService: AuthService) { }
 
   getSurveys(): Survey[]{
       return this.repository.getActiveSurveys( );
@@ -27,7 +28,7 @@ export class ListComponent {
 
 
   deleteSurvey(id : number): void{
-    console.log("here")
+    
     if(confirm('Are you sure')){
       this.repository.deleteSurvey(id);
     }
@@ -39,13 +40,18 @@ export class ListComponent {
 
   updateSurvey(id: number):void{
 
-    this.router.navigateByUrl('/update/'+ id);
+    this.router.navigateByUrl('admin/update/'+ id);
   } 
-
 
   fillSurvey(id: number):void {
 
     this.router.navigateByUrl('/survey-list/fill/'+ id);
 
+  }
+
+  isLoggedIn(): boolean
+  {
+    const result = this.authService.authenticated;
+    return result;
   }
 }

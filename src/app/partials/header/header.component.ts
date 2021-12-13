@@ -1,7 +1,10 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+
+import { AuthGuard } from 'src/app/admin/auth/auth.guard';
 import { AuthService } from 'src/app/model-2/auth.service';
 import { User } from 'src/app/model-2/user.model';
+
 
 @Component({
   selector: 'app-header',
@@ -10,19 +13,20 @@ import { User } from 'src/app/model-2/user.model';
 })
 export class HeaderComponent {
 
-  user: User
-  
-  constructor(private authService: AuthService,
-              private router:Router) { }
 
+ constructor(private router:Router, private authguard: AuthGuard, private authService: AuthService) { }
+
+ user: User
+  
  ngOnInit(): void {
   
   this.user = new User();
 
   }
+
   createSurvey():void{
 
-    this.router.navigateByUrl('/survey-list/create')
+    this.router.navigateByUrl('admin/survey-list/create')
 
   }
 
@@ -32,14 +36,16 @@ export class HeaderComponent {
     if (result)
     {
       this.user = JSON.parse(localStorage.getItem('user'));
+
     }
     return result;
   }
 
   onLogoutClick(): void
   {
-    this.authService.logout().subscribe(data => {
+      this.authService.logout().subscribe(data => {
       this.router.navigate(['/login']);
     });
   }
+
 }
