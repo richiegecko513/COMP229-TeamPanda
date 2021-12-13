@@ -15,4 +15,4 @@ res.sendFile(join(__dirname+'/dist/<name-of-app>/index.html'));
 
 // Start the app by listening on the default Heroku port
 // eslint-disable-next-line no-undef
-app.listen(process.env.PORT || 8080);
+app.listen(process.env.PORT || 3000);
