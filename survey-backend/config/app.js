@@ -98,7 +98,8 @@ passport.use(strategy);
 app.use('/api', surveyRouter);
 app.get("*",(req, res)=>{
 
-  res.sendFile(path.join(__dirname, '../../../public/index.html'))
+  res.sendFile(path.join(__dirname,'../../public/index.html'))
+  
 });
 
 //PORT
