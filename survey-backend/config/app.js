@@ -10,6 +10,7 @@ let cookieParser = require('cookie-parser');
 
 //modules for authentication
 let session = require('express-session');
+let memorystore = require('memorystore')
 let passport = require('passport');
 
 let passportJWT = require('passport-jwt');
@@ -50,6 +51,15 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+
+app.use(session({
+  cookie: { maxAge: 86400000 },
+  store: new memorystore({
+    checkPeriod: 86400000 // prune expired entries every 24h
+  }),
+  resave: false,
+  secret: 'keyboard cat'
+}))
 
 app.use(cors());
 
