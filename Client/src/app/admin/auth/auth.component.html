@@ -1,0 +1,101 @@
+
+
+<main id="login" class="content">
+
+    <div class="bg-info p-2 text-center text-white">
+        <h1>Please Log in</h1>
+     </div>
+
+
+    <div class="row ">
+        <div class="col-md-6 offset-md-3 col-lg-6 offset-lg-3 col-sm-8 offset-sm-1">
+            
+            <!--Error message for logging in-->
+            <div class="bg-danger mt-2 p-2 text-center text-white" *ngIf='errorMessage != null'>
+                {{errorMessage}}
+            </div>
+            
+            <form autocomplete="off" #form='ngForm' (ngSubmit)='authenticate(form)'>
+
+                <fieldset class="form-group p-3">
+                    <label for="username">Username:</label>
+                    <input type="text" class="form-control" 
+                    [(ngModel)]='user.username' name="username" placeholder="Enter Username" id="username" required autofocus autocomplete="off">
+                </fieldset>
+
+
+                <fieldset class="form-group p-3">
+                    <label for="password">Password:</label>
+                    <input type="password" class="form-control" 
+                    [(ngModel)]='user.password' name="password" placeholder="Enter Password" id="password" required autocomplete="off">
+                </fieldset>
+                or
+                <a (click)='switchViews()' tabindex="16">Register Here</a>
+
+                <!--Buttons-->
+                <fieldset class="form-group text-center p-3">
+                    <button class="btn btn-primary m-1" type="submit">
+                        <i class="fas fa-sign-in-alt"></i>
+                         Login
+                    </button>
+                    <button class="btn btn-secondary m-1" routerLink="/home">
+                        <i class="fas fa-undo"></i>
+                         Cancel
+                    </button>
+                </fieldset>
+
+            </form>
+        </div>
+    </div>
+</main>
+
+<main id="register" class="content">
+
+    <div class="bg-info p-2 text-center text-white">
+        <h1>Please Register</h1>
+     </div>
+    <div class="row">
+        <div class="col-md-6 offset-md-3 col-lg-6 offset-lg-3 col-sm-8 offset-sm-1">
+            
+            <!--Error message for logging in-->
+            <div class="bg-danger mt-2 p-2 text-center text-white" *ngIf='errorMessage != null'>
+                {{errorMessage}}
+            </div>
+            
+            <form autocomplete="off" #form='ngForm' (ngSubmit)='create(form)'>
+
+                <fieldset class="form-group p-3">
+                    <label for="username">Username:</label>
+                    <input type="text" class="form-control" 
+                    [(ngModel)]='user.username' name="username" placeholder="Enter Username" id="username" required autofocus autocomplete="off">
+                </fieldset>
+
+
+                <fieldset class="form-group p-3">
+                    <label for="password">Password:</label>
+                    <input type="password" class="form-control" 
+                    [(ngModel)]='user.password' name="password" placeholder="Enter Password" id="password" required autocomplete="off">
+                </fieldset>
+
+
+                <fieldset class="form-group p-3">
+                    <label for="email">Email:</label>
+                    <input type="text" class="form-control" 
+                    [(ngModel)]='user.email' name="email" placeholder="Enter Email" id="email" required autocomplete="off">
+                </fieldset>
+
+                <fieldset class="form-group text-center p-3">
+                    <button class="btn btn-primary m-1" type="submit">
+                        <i class="fas fa-sign-in-alt"></i>
+                         Register
+                    </button>
+                    <button class="btn btn-secondary m-1" routerLink="/home">
+                        <i class="fas fa-undo"></i>
+                         Cancel
+                    </button>
+                </fieldset>
+
+            </form>
+        </div>
+    </div>
+</main>

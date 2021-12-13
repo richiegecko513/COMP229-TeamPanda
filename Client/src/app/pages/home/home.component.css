@@ -1,0 +1,20 @@
+#First{
+    text-align: left; 
+    width: 400px; 
+    margin-left: 150px;
+    font-size: large;
+    font-weight: bolder;
+}
+
+#Second{
+    text-align: left; 
+    margin-right: 150px;
+    font-size: large;
+    font-weight: bolder;
+}
+
+#Picture{
+    float: left; 
+    width: 400px;
+    margin-left: 150px;
+}
