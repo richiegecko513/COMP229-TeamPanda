@@ -32,6 +32,6 @@ router.post('/login', surveyController.performLogin)
 router.post('/register', surveyController.processRegisterPage)
 
 //Get to perform user logout
-//router.get('/logout', surveyController.performLogout)
+router.get('/logout', surveyController.performLogout)
 
 module.exports = router;
