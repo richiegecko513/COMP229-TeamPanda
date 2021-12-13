@@ -16,7 +16,7 @@
                         Home </a>
                 </li>
 
-                <li class="nav-item clickable">
+                <li *ngIf='isLoggedIn()' class="nav-item clickable">
                     <a class="nav-link" aria-current="page" (click)='createSurvey()' tabindex="3"><i 
                                 class="fas fa-plus"></i> Create Survey </a>
                 </li>
@@ -26,10 +26,25 @@
                                 class="fas fa-list-alt"></i> View Surveys </a>
                 </li>
          
-                <li class="nav-item">
+                <li class="nav-item"  *ngIf='!isLoggedIn()'>
                     <a class="nav-link" aria-current="page"  href="/login" tabindex="7"><i 
                         class="fas fa-lg fa-sign-in-alt"></i> Login</a>
                 </li>
+
+               <li *ngIf='isLoggedIn()' class="nav-item">
+                <a class="nav-link">
+                           </a>
+              </li>
+
+               <li *ngIf='isLoggedIn()' class="nav-item pr-10">
+                <a class="nav-link">
+                    <i class="far fa-user"></i> Welcome {{user.username}} </a>
+              </li>
+
+                <li *ngIf='isLoggedIn()' class="nav-item">
+                    <a (click)='onLogoutClick()'  class="nav-link" href="/login">
+                      <i class="fas fa-lg fa-sign-out-alt"></i> Logout</a>
+                </li>            
 
                 
             </ul>
