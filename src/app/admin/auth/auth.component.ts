@@ -27,14 +27,14 @@ export class AuthComponent implements OnInit {
     if (form.valid){
     
       this.auth.authenticate(this.user).subscribe(data=>{
+
         if(data.success){
 
           this.auth.storeUserData(data.token, data.user);
-          this.router.navigateByUrl("admin/main");
+          this.router.navigateByUrl("survey-list");
         }
         else{
           this.errorMessage ="Login Unsuccessful （；¬＿¬)";
-
         }
       });
       
@@ -48,10 +48,9 @@ export class AuthComponent implements OnInit {
   create(form: NgForm): void
   {
     if (form.valid){
-      
-      
-       this.auth.register(this.user).subscribe(data=>{
-        console.log(data.success)
+     
+        this.auth.register(this.user).subscribe(data=>{
+       
         if(data.success){
 
           this.router.navigateByUrl("/");
@@ -65,6 +64,7 @@ export class AuthComponent implements OnInit {
 
     }
     else{
+
       this.errorMessage ="Form Data Invalid";
     }
   }
