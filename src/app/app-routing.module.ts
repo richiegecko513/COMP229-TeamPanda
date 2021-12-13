@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './pages/home/home.component';
 import { ListComponent } from './pages/survey/list/list.component';
 import { FillComponent } from './pages/survey/fill/fill.component';
-import { SurveyGuard } from './guards/survey.guard';
+
 
 const routes: Routes = [
   {path:'home', component: HomeComponent, data:{title:'Home'}},
@@ -19,7 +19,6 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule],
-  providers:[SurveyGuard]
+  exports: [RouterModule]
 })
 export class AppRoutingModule { }
